@@ -4,7 +4,7 @@ import { Modal } from 'react-bootstrap';
 import { ReactComponent as EmailSent } from '../../assets/illustrations/email-sent.svg';
 
 const JobSentModal = ({ show, newlyCreatedID, onHide }) => {
-  const jobURL = `https://aprovaai.com.br/#jobs/${newlyCreatedID}`;
+  const jobURL = `${process.env.REACT_APP_SITE_URL}/#jobs/${newlyCreatedID}`;
 
   return (
     <Modal show={show} onHide={onHide} centered>

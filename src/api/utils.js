@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://aprovaaiapi.azurewebsites.net/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.response.use(
   response => response,

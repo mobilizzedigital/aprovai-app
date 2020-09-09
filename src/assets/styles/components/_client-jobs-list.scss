@@ -1,0 +1,19 @@
+.client-jobs-list {
+  height: 490px;
+
+  &-empty {
+    font-size: 0.75rem;
+    color: #898989;
+  }
+
+  &-item {
+    & + & {
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &-name {
+    font-size: 0.75rem;
+    line-height: 0.875rem;
+  }
+}

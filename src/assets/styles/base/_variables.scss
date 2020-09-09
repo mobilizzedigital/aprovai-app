@@ -1,0 +1,62 @@
+// Colors
+$purple: #6e4be8;
+$purple-2: #9faefb;
+$purple-light: #f0f2fe;
+$green: #49c15d;
+$green-light: #edf7ee;
+$red: #ff4136;
+$black: #1b202d;
+$black-light: #3f3f3f;
+$white: #fff;
+$blue: #1ea8e7;
+$orange: #ffa92c;
+$orange-light: #fef5ec;
+$grey: #455a64;
+$grey-light: #c4c4c4;
+
+$body-bg: #f5f6fa;
+$input-bg: transparent;
+$input-border-color: #c9ced6;
+$border-color: #c9ced6;
+$link-color: $black-light;
+$input-group-addon-bg: $white;
+
+$alert-bg-level: 0;
+$alert-color-level: -12;
+$alert-border-level: 0;
+
+$theme-colors: (
+  primary: $purple,
+  success: $green,
+  secondary: #ccc,
+  danger: $red,
+  dark: $black,
+  light: $white
+);
+
+// Fonts
+$poppins: 'Poppins', sans-serif;
+$font-family-sans-serif: $poppins;
+
+// Shadow
+$box-shadow: 0 0 25px rgba($black, 0.1);
+
+// Spacing
+$paragraph-margin-bottom: 0.5rem;
+$grid-gutter-width: 1.5rem;
+$form-check-input-gutter: 30px;
+$dropdown-item-padding-y: 0.875rem;
+$dropdown-spacer: 0.625rem;
+$dropdown-padding-y: 0;
+$modal-header-padding: 1rem 0;
+
+// Sizing
+$input-font-size: 14px;
+$input-font-size-lg: 16px;
+$input-height-lg: 50px;
+$modal-lg: 1000px;
+$dropdown-min-width: 230px;
+
+// Z-Index
+$zindex-modal: 900;
+$zindex-modal-backdrop: 800;

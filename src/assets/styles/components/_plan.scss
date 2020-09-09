@@ -1,0 +1,33 @@
+.plan {
+  &-title {
+    font-size: 1.75rem;
+  }
+
+  &-subtitle {
+    font-size: 0.875rem;
+  }
+
+  &-option {
+    &-selected {
+      border-color: map-get($theme-colors, primary) !important;
+      border-width: 2px !important;
+
+      .plan-option-type {
+        color: $blue;
+      }
+    }
+
+    &-type {
+      font-size: 1rem;
+    }
+
+    &-price {
+      font-size: 2.375rem;
+    }
+
+    &-text {
+      font-size: 0.875rem;
+      white-space: pre-wrap;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.clients-list {
+  &-link {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .item {
+    @include media-breakpoint-up(md) {
+      &:not(:first-child) {
+        border-left: 1px solid rgba(28, 28, 28, 0.12);
+      }
+    }
+
+    &-last-col {
+      border-left: 1px solid rgba(28, 28, 28, 0.12);
+    }
+
+    &-client {
+      font-weight: 500;
+    }
+
+    &-owner {
+      color: $grey;
+      font-size: 0.75rem;
+    }
+  }
+}
+
+.numbers {
+  &-value {
+    font-size: 1.875rem;
+    font-weight: 500;
+  }
+
+  &-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+}

@@ -1,0 +1,31 @@
+.user-account-page {
+  background: url(/images/login-bg.png);
+  height: calc(100vh - 72px);
+  width: 100%;
+
+  &-head-wrapper {
+    height: calc(100vh - 72px);
+  }
+
+  &-head {
+    font-size: 2.1875rem;
+    line-height: 1.5;
+
+    b,
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  &-form {
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+
+    @include media-breakpoint-up(lg) {
+      position: absolute;
+      transform: translateY(-20px);
+      height: calc(100vh - (72px - 20px));
+      border-radius: 0.25rem;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+.text-grey {
+  color: #95999e !important;
+}
+
+.text-default {
+  font-size: 0.875rem !important;
+}
+
+.font-weight-medium {
+  font-weight: 500 !important;
+}
+
+.flex-center {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.sticky-bottom {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+}
+
+.bg-grey-light-200 {
+  background: $body-bg !important;
+}
+
+.bg-grey-light-100 {
+  background: #f5f6fa !important;
+}
+
+.visually-hidden {
+  width: 0 !important;
+  height: 0 !important;
+  visibility: hidden !important;
+  position: absolute !important;
+  left: -9999 !important;
+  top: -9999 !important;
+}
+
+.rotate-left-45 {
+  transform: rotate(-45deg) !important;
+}
+
+.rotate-left-90 {
+  transform: rotate(-90deg) !important;
+}
+
+.rotate-right-45 {
+  transform: rotate(45deg) !important;
+}
+
+.rotate-right-90 {
+  transform: rotate(90deg) !important;
+}
+
+.border-grey {
+  border-color: map-get($theme-colors, $grey);
+}
+
+.hover-outline-none {
+  outline: none !important;
+
+  &:hover {
+    outline: none !important;
+  }
+}
+
+.w-md-auto {
+  @include media-breakpoint-up(md) {
+    width: auto !important;
+  }
+}

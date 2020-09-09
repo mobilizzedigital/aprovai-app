@@ -1,0 +1,54 @@
+.banner {
+  background: linear-gradient(266.7deg, $purple 10.12%, $blue 131.91%);
+
+  &-title {
+    font-size: 1.875rem;
+    line-height: 1.2;
+  }
+
+  &-subtitle {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: rgba(255, 255, 255, 0.58);
+  }
+
+  &-list {
+    &-item {
+      font-size: 1rem;
+
+      &::before {
+        content: '';
+        display: inline-flex;
+        width: 19px;
+        height: 19px;
+        min-width: 19px;
+        border-radius: 50%;
+        border: 1px solid $white;
+        margin-right: 0.75rem;
+      }
+
+      & + & {
+        margin-top: 1rem;
+      }
+
+      &-checked {
+        &::before {
+          font-family: 'icomoon' !important;
+          speak: none;
+          font-style: normal;
+          font-weight: normal;
+          font-variant: normal;
+          text-transform: none;
+          line-height: 1;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          content: '\e906';
+          font-size: 0.6875rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+  }
+}

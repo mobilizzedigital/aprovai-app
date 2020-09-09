@@ -1,0 +1,20 @@
+.account-menu {
+  &-item {
+    font-size: 1.125rem;
+  }
+
+  .text-primary {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 2px;
+      height: 31px;
+      background: map-get($theme-colors, primary);
+      border-radius: 3px;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+.job-card {
+  &-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  &-image {
+    height: 253px;
+    min-width: 100%;
+  }
+
+  &-name {
+    font-size: 0.875rem;
+  }
+
+  &-remove {
+    top: 8px;
+    right: 5px;
+  }
+}

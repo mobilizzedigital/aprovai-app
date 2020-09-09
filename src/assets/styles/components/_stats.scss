@@ -1,0 +1,32 @@
+.stats {
+  &-bordered {
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+
+    &.stats-pendente {
+      border-bottom-color: $purple-2;
+    }
+
+    &.stats-aprovado {
+      border-bottom-color: $green;
+    }
+
+    &.stats-em-ajuste {
+      border-bottom-color: $orange;
+    }
+  }
+
+  &-value {
+    font-size: 0.9375rem;
+    font-weight: 600;
+
+    @include media-breakpoint-up(md) {
+      font-size: 3.125rem;
+    }
+  }
+
+  &-label {
+    font-size: 0.875rem;
+    line-height: 124%;
+  }
+}

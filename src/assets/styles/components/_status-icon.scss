@@ -1,0 +1,29 @@
+.status-icon {
+  .icon {
+    font-size: 90%;
+  }
+
+  &-aprovado {
+    background: $green-light;
+
+    .icon {
+      color: $green;
+    }
+  }
+
+  &-pendente {
+    background: $purple-light;
+
+    .icon {
+      color: $purple;
+    }
+  }
+
+  &-em-ajuste {
+    background: $orange-light;
+
+    .icon {
+      color: $orange;
+    }
+  }
+}

@@ -1,0 +1,60 @@
+.jobs-list-table {
+  font-size: 0.875rem;
+
+  thead {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+    th {
+      @include font-size(12px);
+    }
+  }
+
+  tbody {
+    padding: 0 14px;
+
+    tr + tr {
+      td {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
+
+.link {
+  background: #c8ccd4;
+  border-radius: 4px;
+  width: 37px;
+  height: 37px;
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 0.875rem;
+
+  &:hover {
+    background: darken(#c8ccd4, 20%);
+    text-decoration: none;
+    color: #fff;
+  }
+}
+
+.status {
+  font-size: 0.875rem;
+  width: 140px;
+
+  &-ajuste {
+    color: $orange;
+    background: $orange-light;
+  }
+
+  &-pendente {
+    color: $purple;
+    background: $purple-light;
+  }
+
+  &-aprovado {
+    color: $green;
+    background: $green-light;
+  }
+}

@@ -1,0 +1,68 @@
+.btn {
+  font-weight: 500;
+
+  &-lg {
+    font-size: 1rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  &-highlight {
+    background: linear-gradient(259.11deg, $purple 1.82%, $blue 102.1%);
+    color: $white;
+
+    &:hover {
+      background: linear-gradient(
+        259.11deg,
+        darken($purple, 20%) 1.82%,
+        darken($blue, 20%) 102.1%
+      );
+      color: $white;
+    }
+  }
+
+  &-link {
+    .icon {
+      color: #898989;
+    }
+  }
+
+  &-icon-lg {
+    display: flex;
+    align-items: center;
+
+    .icon {
+      font-size: 1.125rem !important;
+    }
+  }
+
+  &-notification {
+    font-size: 1.25rem;
+
+    &::after {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: $red;
+      display: block;
+      position: absolute;
+      top: 6px;
+      right: 3px;
+    }
+
+    &.has-unread-notifications {
+      &::after {
+        content: '';
+      }
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .icon {
+    font-size: 0.875rem;
+    margin-right: 10px;
+  }
+}

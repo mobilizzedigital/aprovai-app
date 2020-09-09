@@ -1,0 +1,49 @@
+.timeline {
+  color: $grey;
+
+  &-item {
+    &:last-child {
+      margin-bottom: 0 !important;
+
+      .timeline-content {
+        border-bottom: 0 !important;
+      }
+    }
+  }
+
+  &-message {
+    font-size: 0.75rem;
+  }
+
+  &-comment {
+    background: #f5f6fa;
+  }
+
+  &-icon {
+    width: 15px;
+    height: 15px;
+    font-size: 7px;
+    top: 5px;
+    left: 24px;
+
+    &-send {
+      background: $blue;
+      color: $white;
+    }
+
+    &-adjust {
+      background: $orange-light;
+      color: $orange;
+    }
+
+    &-view {
+      background: $purple-light;
+      color: $purple;
+    }
+
+    &-approve {
+      background: $green-light;
+      color: $green;
+    }
+  }
+}

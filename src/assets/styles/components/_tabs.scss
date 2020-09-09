@@ -1,0 +1,18 @@
+.tabs-btn {
+}
+
+.active {
+  .tabs-btn {
+    background: linear-gradient(259.11deg, $purple 1.82%, $blue 102.1%);
+    color: $white;
+
+    &:hover {
+      background: linear-gradient(
+        259.11deg,
+        darken($purple, 20%) 1.82%,
+        darken($blue, 20%) 102.1%
+      );
+      color: $white;
+    }
+  }
+}

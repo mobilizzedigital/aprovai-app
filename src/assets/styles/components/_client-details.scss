@@ -1,0 +1,12 @@
+.client-details {
+  &-name {
+    font-size: 1.75rem;
+    line-height: 2.625rem;
+  }
+
+  &-text {
+    font-size: 0.875rem;
+    line-height: 1.3125rem;
+    color: $black-light;
+  }
+}

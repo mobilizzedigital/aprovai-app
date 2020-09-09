@@ -1,0 +1,37 @@
+.logo {
+  width: 150px;
+}
+
+.header {
+  &.navbar {
+    .nav-link {
+      color: $white;
+
+      &.active {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.dropdown-menu {
+  left: -89px;
+}
+
+.dropdown-item {
+  & + & {
+    border-top: 1px solid $border-color;
+  }
+}
+
+.toggle-menu-icon {
+  font-size: 1.75rem;
+}
+
+.navbar-toggler {
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}

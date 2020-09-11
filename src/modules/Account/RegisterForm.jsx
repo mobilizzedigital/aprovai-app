@@ -72,7 +72,7 @@ const RegisterForm = () => {
       <hr />
       <h5 className="text-center">Criar conta</h5>
       <p className="mb-5 text-center">
-        Preencha os dados para realizar o seu cadastro
+        Preencha os dados abaixo para testar grátis
       </p>
       <Form.Group controlId="name">
         <Form.Label>Nome</Form.Label>

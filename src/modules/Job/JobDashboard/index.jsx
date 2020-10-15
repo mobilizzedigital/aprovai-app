@@ -49,7 +49,11 @@ const JobDashboard = ({ id, setPageTitle }) => {
       setTimeline(timeline.andamentos);
 
       if (isPackage) {
-        if (showNextFileToAproveIfExists(job.urlArquivo, timeline.andamentos)) {
+        const hasMoreFilesToValidate = showNextFileToValidateIfExists(
+          job.urlArquivo,
+          timeline.andamentos
+        );
+        if (hasMoreFilesToValidate) {
           addToast('Ajuste no item solicitado com sucesso!', {
             appearance: 'success'
           });
@@ -67,7 +71,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
   /**
    * Show the next file that is not approved/has changes requested if exists
    */
-  const showNextFileToAproveIfExists = (files = [], timeline = []) => {
+  const showNextFileToValidateIfExists = (files = [], timeline = []) => {
     let nextFileIndex = null;
 
     files.forEach(({ id, situacao }, index) => {
@@ -95,7 +99,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
     if (nextFileIndex !== null) {
       setIndex(nextFileIndex);
-      // There is a next file to be approved
+      // There is another file to be approved
       return true;
     }
     // There is not
@@ -113,21 +117,31 @@ const JobDashboard = ({ id, setPageTitle }) => {
         situacao: PROGRESS_TYPES.fileApproved
       });
       const { data: timeline } = await JobsAPI.getProgress(id);
-      addToast('Arquivo aprovado', { appearance: 'success' });
       setTimeline(timeline.andamentos);
       setSaving(false);
       // Update file status
       const jobUpdated = {
         ...job,
         urlArquivo: job.urlArquivo.map(file => {
-          if (file.id === fileId) {
-            return { ...file, situacao: 'Aprovado' };
-          }
+          if (file.id === fileId) return { ...file, situacao: 'Aprovado' };
           return file;
         })
       };
       setJob(jobUpdated);
-      showNextFileToAproveIfExists(jobUpdated.urlArquivo, timeline.andamentos);
+      // File approved, should now check for more files to be approved
+      const hasMoreFilesToValidate = showNextFileToValidateIfExists(
+        jobUpdated.urlArquivo,
+        timeline.andamentos
+      );
+      if (hasMoreFilesToValidate) {
+        addToast('Arquivo aprovado!', { appearance: 'success' });
+      } else {
+        addToast(
+          'Pronto, jobs foram enviados! você receberá uma notificação por e-mail quando receberem uma atualização.',
+          { appearance: 'success' }
+        );
+        history.push(ROUTES.home);
+      }
     } catch (error) {
       addToast(error.message, { appearance: 'error' });
       setSaving(false);
@@ -144,7 +158,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
       setSaving(false);
       setJob({ ...job, situacao: 'Aprovado' });
-      addToast('Projeto aprovado', { appearance: 'success' });
+      addToast('Projeto aprovado!', { appearance: 'success' });
       history.push(ROUTES.home);
     } catch (error) {
       addToast(error.message, { appearance: 'error' });

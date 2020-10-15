@@ -17,7 +17,7 @@ const JobCard = ({ id, index, image, name, status = '', onRemove }) => (
       </button>
     </figure>
     <Link
-      to={getJobDashboardRoute(id)}
+      to={id ? getJobDashboardRoute(id) : '#'}
       className="d-flex align-items-center justify-content-between p-3"
     >
       <div className="d-flex align-items-center">

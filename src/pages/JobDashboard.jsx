@@ -28,9 +28,7 @@ const JobDashboardPage = () => {
   return (
     <>
       <Breadcrumb items={breadcrumb} expanded={false} />
-      <main>
-        <JobDashboard id={id} setPageTitle={handleSetPageTitle} />
-      </main>
+      <JobDashboard id={id} setPageTitle={handleSetPageTitle} />
     </>
   );
 };

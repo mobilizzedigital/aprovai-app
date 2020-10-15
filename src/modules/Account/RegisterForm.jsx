@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { useToasts } from 'react-toast-notifications';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import LoadingSpinnerButton from '../../components/LoadingSpinnerButton';
 import { UserAPI } from '../../api';
@@ -14,7 +14,9 @@ const RegisterForm = () => {
   const [saving, setSaving] = useState(false);
   const { register, handleSubmit, errors, setError } = useForm();
   const { addToast } = useToasts();
+  const { search } = useLocation();
   const history = useHistory();
+  const urlParams = new URLSearchParams(search);
 
   const validatePasswordEquals = (password, confirmation) => {
     if (password !== confirmation) {
@@ -36,6 +38,20 @@ const RegisterForm = () => {
     formData.append('Password', password);
     formData.append('PasswordConfirmation', confirmPassword);
     formData.append('secret', process.env.REACT_APP_API_SECRET);
+
+    const utcSource = urlParams.get('utm_source');
+    const utcCampaign = urlParams.get('utm_campaign');
+    const utcMedium = urlParams.get('utm_medium');
+
+    if (utcSource) {
+      formData.append('utm_source', utcSource);
+    }
+    if (utcCampaign) {
+      formData.append('utm_campaign', utcCampaign);
+    }
+    if (utcMedium) {
+      formData.append('utm_medium', utcMedium);
+    }
 
     setSaving(true);
 

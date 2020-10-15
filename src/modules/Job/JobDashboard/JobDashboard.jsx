@@ -25,7 +25,7 @@ const JobDashboard = ({
   handleCloseChangesModal,
   progressItems
 }) => (
-  <main className="my-5 pb-5">
+  <main className="mt-5 pb-5" style={{ marginBottom: 180 }}>
     <Container>
       <Row>
         <Col md={4}>

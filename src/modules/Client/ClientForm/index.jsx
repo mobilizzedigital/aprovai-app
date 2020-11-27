@@ -8,7 +8,8 @@ import { useHistory } from 'react-router-dom';
 import ClientFormComponent from './ClientForm';
 import { ClientsAPI } from '../../../api';
 import ROUTES from '../../../routes';
-import { toggleCreateJobModal } from '../../../store';
+import { toggleCreateJobModal, togglePlansModal } from '../../../store';
+import { HTTP_ERROR_TYPES } from '../../../constants';
 
 const defaultApprover = [{ id: 0, name: '', email: '', default: true }];
 
@@ -127,7 +128,12 @@ const ClientForm = ({ id }) => {
         });
     } catch (error) {
       setSaving(false);
-      addToast(error.response.data.message, { appearance: 'error' });
+
+      if (error.response.status === HTTP_ERROR_TYPES.badRequest) {
+        dispatch(togglePlansModal({ hasExceedMaxClients: true }));
+      } else {
+        addToast(error.response.data.message, { appearance: 'error' });
+      }
     }
   };
 

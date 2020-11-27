@@ -11,13 +11,15 @@ import {
   plansSelector,
   addPlans,
   addTargetPlan,
-  userPlanSelector
+  userPlanSelector,
+  hasExceedMaxClientsSelector
 } from '../../store';
 
 const UserPlan = () => {
   const showPlansModal = useSelector(showPlansModalSelector);
   const userPlan = useSelector(userPlanSelector);
   const plans = useSelector(plansSelector);
+  const hasExceedMaxClients = useSelector(hasExceedMaxClientsSelector);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -51,6 +53,7 @@ const UserPlan = () => {
       show={showPlansModal}
       onHide={handleTogglePlansModal}
       onSelectPlan={handleSelectPlan}
+      hasExceedMaxClients={hasExceedMaxClients}
     />
   );
 };

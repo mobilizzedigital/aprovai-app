@@ -131,7 +131,6 @@ const JobForm = ({ id, name, type, client }) => {
   const saveJob = async () => {
     const formData = new FormData();
 
-    console.log(files);
     if (id) {
       formData.append('Id', parseInt(id, 10));
     } else {

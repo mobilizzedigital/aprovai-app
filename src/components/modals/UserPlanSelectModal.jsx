@@ -1,18 +1,27 @@
 import React from 'react';
-import { Modal, Button, ButtonGroup, Row, Col } from 'react-bootstrap';
+import { Modal, Button, ButtonGroup, Row, Col, Alert } from 'react-bootstrap';
 
 import { cn, formatMoney } from '../../utils';
+import Icon from '../Icon';
 
 const UserPlanSelectModal = ({
   show,
   onHide,
   onSelectPlan,
   plans,
-  currentPlan
+  currentPlan,
+  hasExceedMaxClients
 }) => (
   <Modal show={show} onHide={onHide} size="lg" centered>
     <Modal.Header className="px-5 pt-4" closeButton></Modal.Header>
     <Modal.Body className="text-center pt-0 pb-5 px-5">
+      {hasExceedMaxClients && (
+        <Alert variant="warning" className="mb-4 text-center">
+          <Icon name={Icon.types.warning} className="mr-3" />
+          Você atingiu seu limite de clientes ativos para o plano{' '}
+          {currentPlan.titulo}. Mude seu plano para cadastrar mais clientes.
+        </Alert>
+      )}
       <div className="plan">
         <h1 className="plan-title font-weight-bold">Planos de preços</h1>
         <p className="plan-subtitle">

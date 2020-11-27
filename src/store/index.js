@@ -20,7 +20,8 @@ export {
   showPlansModalSelector,
   userPlanSelector,
   plansSelector,
-  targetPlanSelector
+  targetPlanSelector,
+  hasExceedMaxClientsSelector
 } from './selectors';
 
 const store = configureStore({

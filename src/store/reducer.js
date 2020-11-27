@@ -32,10 +32,18 @@ export const reducer = createReducer(initialState, {
     showCreateJobModal: !state.showCreateJobModal
   }),
 
-  [actions.togglePlansModal]: state => ({
-    ...state,
-    showPlansModal: !state.showPlansModal
-  }),
+  [actions.togglePlansModal]: (state, action) => {
+    const newState = { ...state, showPlansModal: !state.showPlansModal };
+    // whenever it closes the modal, the hasExceedMaxClients is reseted
+    if (!newState.showPlansModal) {
+      newState.hasExceedMaxClients = false;
+    } else {
+      if (action.payload && action.payload.hasExceedMaxClients) {
+        newState.hasExceedMaxClients = true;
+      }
+    }
+    return newState;
+  },
 
   [actions.addUserPlan]: (state, action) => ({
     ...state,

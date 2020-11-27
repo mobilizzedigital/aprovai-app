@@ -11,3 +11,7 @@ export const PROGRESS_TYPES = {
   reSent: 'Re-enviado',
   viewed: 'Visualizado'
 };
+
+export const HTTP_ERROR_TYPES = {
+  badRequest: 400
+};

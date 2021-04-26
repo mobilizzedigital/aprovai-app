@@ -5,7 +5,7 @@ const path = 'Cliente';
 export async function getClients(perPage = 10, page = 0, name) {
   const query = {
     qtdRegistro: perPage,
-    page
+    page,
   };
   if (name) {
     query.nome = name;

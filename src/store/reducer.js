@@ -10,8 +10,8 @@ const initialState = {
   plans: {
     current: {},
     target: {},
-    options: []
-  }
+    options: [],
+  },
 };
 
 export const reducer = createReducer(initialState, {
@@ -19,17 +19,17 @@ export const reducer = createReducer(initialState, {
 
   [actions.updateUser]: (state, action) => ({
     ...state,
-    user: { ...state.user, ...action.payload }
+    user: { ...state.user, ...action.payload },
   }),
 
   [actions.addTopClients]: (state, action) => ({
     ...state,
-    topClients: action.payload
+    topClients: action.payload,
   }),
 
-  [actions.toggleCreateJobModal]: state => ({
+  [actions.toggleCreateJobModal]: (state) => ({
     ...state,
-    showCreateJobModal: !state.showCreateJobModal
+    showCreateJobModal: !state.showCreateJobModal,
   }),
 
   [actions.togglePlansModal]: (state, action) => {
@@ -49,25 +49,25 @@ export const reducer = createReducer(initialState, {
     ...state,
     plans: {
       ...state.plans,
-      current: action.payload
-    }
+      current: action.payload,
+    },
   }),
 
   [actions.addTargetPlan]: (state, action) => ({
     ...state,
     plans: {
       ...state.plans,
-      target: action.payload
-    }
+      target: action.payload,
+    },
   }),
 
   [actions.addPlans]: (state, action) => ({
     ...state,
     plans: {
       ...state.plans,
-      options: action.payload
-    }
-  })
+      options: action.payload,
+    },
+  }),
 });
 
 export default reducer;

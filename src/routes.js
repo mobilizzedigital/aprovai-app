@@ -16,7 +16,7 @@ const ROUTES = {
   accountPayment: '/account/payment',
   login: '/login',
   register: '/register',
-  forgotPassword: '/forgot-password'
+  forgotPassword: '/forgot-password',
 };
 
 export function getJobDashboardRoute(id) {

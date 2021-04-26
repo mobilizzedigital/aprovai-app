@@ -3,8 +3,8 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API_URL;
 
 axios.interceptors.response.use(
-  response => response,
-  error => {
+  (response) => response,
+  (error) => {
     if (error.response.status) {
       /** @TODO Redirect user to login and remove session */
     }
@@ -27,8 +27,8 @@ export async function getRequest(path, params = {}) {
     params,
     headers: {
       'Content-Type': 'multipart/form-data',
-      ...authHeader()
-    }
+      ...authHeader(),
+    },
   });
 }
 
@@ -40,8 +40,8 @@ export async function postRequest(
   return await axios.post(`${API_URL}/${path}`, data, {
     headers: {
       'Content-Type': contentType,
-      ...authHeader()
-    }
+      ...authHeader(),
+    },
   });
 }
 
@@ -53,8 +53,8 @@ export async function putRequest(
   return await axios.put(`${API_URL}/${path}`, data, {
     headers: {
       'Content-Type': contentType,
-      ...authHeader()
-    }
+      ...authHeader(),
+    },
   });
 }
 
@@ -66,7 +66,7 @@ export async function deleteRequest(
   return await axios.delete(`${API_URL}/${path}`, {
     headers: {
       'Content-Type': contentType,
-      ...authHeader()
-    }
+      ...authHeader(),
+    },
   });
 }

@@ -7,7 +7,7 @@ import LoadingState from '../../../components/LoadingState';
 import Avatar from '../../../components/Avatar';
 import { JOB_TYPES } from '../../../constants';
 
-const Control = props => {
+const Control = (props) => {
   const value = props.getValue();
 
   if (value && value.length) {
@@ -35,7 +35,7 @@ const Control = props => {
   return <components.Control {...props} className="form-control-select" />;
 };
 
-const Option = props => {
+const Option = (props) => {
   const { data } = props;
 
   return (
@@ -59,7 +59,7 @@ const CreateJobModal = ({
   register,
   errors,
   client,
-  showErrorClient
+  showErrorClient,
 }) => (
   <Modal show={show} onHide={onHide} centered>
     <Form onSubmit={handleSubmit}>
@@ -114,7 +114,7 @@ const CreateJobModal = ({
                     placeholder="Selecione o cliente"
                     components={{
                       Control,
-                      Option
+                      Option,
                     }}
                   />
                   {showErrorClient && (

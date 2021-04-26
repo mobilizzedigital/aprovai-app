@@ -10,12 +10,12 @@ const UploadField = ({
   file,
   multiple = false,
   infoText = defaultText,
-  handleUpload
+  handleUpload,
 }) => {
-  const onReadFiles = files => {
+  const onReadFiles = (files) => {
     const readFiles = files.map(
-      file =>
-        new Promise(resolve => {
+      (file) =>
+        new Promise((resolve) => {
           const reader = new FileReader();
           reader.onload = () => resolve([reader.result, file]);
           reader.readAsDataURL(file);
@@ -31,7 +31,7 @@ const UploadField = ({
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
     accept,
-    multiple
+    multiple,
   });
 
   return (
@@ -40,7 +40,7 @@ const UploadField = ({
       <div
         className={cn([
           'field-upload rounded border d-flex justify-content-center align-items-center flex-column',
-          !file ? 'p-4' : ''
+          !file ? 'p-4' : '',
         ])}
       >
         {file ? (

@@ -30,7 +30,7 @@ Icon.types = {
   settings: 'settings',
   warning: 'warning',
   menu: 'menu',
-  close: 'close'
+  close: 'close',
 };
 
 export default Icon;

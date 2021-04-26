@@ -27,13 +27,13 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
   const handleCloseChangesModal = () => history.push(ROUTES.home);
 
-  const handleRequestChanges = async description => {
+  const handleRequestChanges = async (description) => {
     setSaving(true);
 
     const data = {
       idProjeto: parseInt(id, 10),
       comentario: description,
-      situacao: PROGRESS_TYPES.requestedAdjust
+      situacao: PROGRESS_TYPES.requestedAdjust,
     };
 
     if (isPackage) {
@@ -55,7 +55,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
         );
         if (hasMoreFilesToValidate) {
           addToast('Ajuste no item solicitado com sucesso!', {
-            appearance: 'success'
+            appearance: 'success',
           });
         } else {
           setShowChangesModal(true);
@@ -76,7 +76,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
     files.forEach(({ id, situacao }, index) => {
       let requestedChanges = false;
-      const timelineItems = timeline.filter(timelineItem => {
+      const timelineItems = timeline.filter((timelineItem) => {
         if (timelineItem.idArquivo === id) {
           return true;
         }
@@ -114,7 +114,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
       await JobsAPI.addProgress({
         idProjeto: parseInt(id, 10),
         idArquivo: parseInt(fileId, 10),
-        situacao: PROGRESS_TYPES.fileApproved
+        situacao: PROGRESS_TYPES.fileApproved,
       });
       const { data: timeline } = await JobsAPI.getProgress(id);
       setTimeline(timeline.andamentos);
@@ -122,10 +122,10 @@ const JobDashboard = ({ id, setPageTitle }) => {
       // Update file status
       const jobUpdated = {
         ...job,
-        urlArquivo: job.urlArquivo.map(file => {
+        urlArquivo: job.urlArquivo.map((file) => {
           if (file.id === fileId) return { ...file, situacao: 'Aprovado' };
           return file;
-        })
+        }),
       };
       setJob(jobUpdated);
       // File approved, should now check for more files to be approved
@@ -153,7 +153,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
       await JobsAPI.approveJob(id);
       await JobsAPI.addProgress({
         idProjeto: parseInt(id, 10),
-        situacao: PROGRESS_TYPES.approved
+        situacao: PROGRESS_TYPES.approved,
       });
 
       setSaving(false);
@@ -174,7 +174,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
   const getTimelineItemsFiltered = () => {
     if (jobType === JOB_TYPES.separate) return timeline;
 
-    return timeline.filter(item => {
+    return timeline.filter((item) => {
       if (!item.idArquivo || item.idArquivo === job.urlArquivo[index || 0].id) {
         return true;
       }
@@ -186,13 +186,13 @@ const JobDashboard = ({ id, setPageTitle }) => {
   const setViewedJob = useCallback(() => {
     (async () => {
       const hasViewed =
-        timeline.filter(p => p.situacao === PROGRESS_TYPES.viewed).length > 0;
+        timeline.filter((p) => p.situacao === PROGRESS_TYPES.viewed).length > 0;
 
       if (!user.isAdmin && !hasViewed) {
         try {
           await JobsAPI.addProgress({
             idProjeto: job.id,
-            situacao: PROGRESS_TYPES.viewed
+            situacao: PROGRESS_TYPES.viewed,
           });
 
           setTimeline([
@@ -203,8 +203,8 @@ const JobDashboard = ({ id, setPageTitle }) => {
               id: 0,
               logoUrl: user.profilePicture,
               situacao: 'Visualizado',
-              usuario: user.name
-            }
+              usuario: user.name,
+            },
           ]);
         } catch (e) {}
       }
@@ -215,7 +215,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
     (async () => {
       const fileId = job.urlArquivo[index].id;
       const progress = timeline.filter(
-        p => p.idArquivo === fileId && p.situacao === PROGRESS_TYPES.viewed
+        (p) => p.idArquivo === fileId && p.situacao === PROGRESS_TYPES.viewed
       );
       const hasViewed = progress.length > 0;
 
@@ -224,7 +224,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
           await JobsAPI.addProgress({
             idProjeto: job.id,
             idArquivo: parseInt(fileId, 10),
-            situacao: PROGRESS_TYPES.viewed
+            situacao: PROGRESS_TYPES.viewed,
           });
 
           setTimeline([
@@ -236,8 +236,8 @@ const JobDashboard = ({ id, setPageTitle }) => {
               idArquivo: fileId,
               logoUrl: user.profilePicture,
               situacao: 'Visualizado',
-              usuario: user.name
-            }
+              usuario: user.name,
+            },
           ]);
         } catch (e) {}
       }

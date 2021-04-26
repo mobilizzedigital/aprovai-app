@@ -19,7 +19,7 @@ const Items = ({ items, emptyText, onEdit, onRemove }) => {
 
   return (
     <ul>
-      {items.map(item => (
+      {items.map((item) => (
         <li key={`member_${item.id}`}>
           <Row>
             <Col xs={3}>

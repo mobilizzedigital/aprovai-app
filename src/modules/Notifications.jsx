@@ -33,7 +33,7 @@ const Notifications = ({ isDisabled = false }) => {
     const fetchUnreadNotifications = async () => {
       try {
         const {
-          data: { notificacoes, totalRegistros }
+          data: { notificacoes, totalRegistros },
         } = await NotificationAPI.getNotifications(10, 0, false);
 
         setNotifications(notificacoes);
@@ -68,7 +68,7 @@ const Notifications = ({ isDisabled = false }) => {
               top: 40,
               transform: 'translateX(-192px)',
               zIndex: 5,
-              maxWidth: '100%'
+              maxWidth: '100%',
             }}
           >
             <Timeline style={{ width: 400 }}>
@@ -76,7 +76,7 @@ const Notifications = ({ isDisabled = false }) => {
                 <Timeline.Empty message="Você não tem nofiticações!" />
               )}
 
-              {notifications.map(notification => (
+              {notifications.map((notification) => (
                 <Timeline.Item
                   key={`notification_${notification.id}`}
                   image={null}

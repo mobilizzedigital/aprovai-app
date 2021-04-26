@@ -21,7 +21,7 @@ const ForgotPasswordForm = () => {
       await UserAPI.forgotPassword(email);
     } catch (e) {}
     addToast('Você recebera um email com a nova senha!', {
-      appearance: 'success'
+      appearance: 'success',
     });
     setSaving(false);
   };
@@ -47,12 +47,12 @@ const ForgotPasswordForm = () => {
           ref={register({
             required: {
               value: true,
-              message: 'Email obrigatório!'
+              message: 'Email obrigatório!',
             },
             pattern: {
               value: EMAIL_REGEX,
-              message: 'Email inválido'
-            }
+              message: 'Email inválido',
+            },
           })}
           name="email"
         />

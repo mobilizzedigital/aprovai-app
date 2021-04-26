@@ -16,7 +16,7 @@ const TeamMemberPermissionsModal = ({ show, clients }) => (
         <div className="py-2 px-3 bg-grey-light-200 rounded">
           <Form.Check label="MARCAR TODOS" type="checkbox" id="check_1" />
         </div>
-        {clients.map(client => (
+        {clients.map((client) => (
           <div className="px-3 py-4 border-bottom" key={client.id}>
             <Form.Check
               label={client.name}

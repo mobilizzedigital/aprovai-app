@@ -21,7 +21,7 @@ const AddTeamMember = ({ show, onHide, onMemberAdded }) => {
       const { data } = await UserAPI.addMember({
         id: 'ignore-me-at-all',
         nome: name,
-        email
+        email,
       });
       addToast(data.message, { appearance: 'success' });
       onMemberAdded();
@@ -70,12 +70,12 @@ const AddTeamMember = ({ show, onHide, onMemberAdded }) => {
               ref={register({
                 required: {
                   value: true,
-                  message: 'Email obrigatório!'
+                  message: 'Email obrigatório!',
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                  message: 'Email inválido'
-                }
+                  message: 'Email inválido',
+                },
               })}
             />
             {errors.email && (

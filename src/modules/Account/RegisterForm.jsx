@@ -58,7 +58,7 @@ const RegisterForm = () => {
     try {
       await UserAPI.saveUser(formData);
       addToast('Usuário criado com sucesso, realize o login!', {
-        appearance: 'success'
+        appearance: 'success',
       });
       history.push(ROUTES.login);
     } catch (error) {
@@ -66,7 +66,7 @@ const RegisterForm = () => {
         addToast(error.response.data.descricao, { appearance: 'error' });
       } else {
         addToast('Houve um erro ao cadastrar o cliente!', {
-          appearance: 'error'
+          appearance: 'error',
         });
       }
     }
@@ -110,12 +110,12 @@ const RegisterForm = () => {
           ref={register({
             required: {
               value: true,
-              message: 'Email obrigatório!'
+              message: 'Email obrigatório!',
             },
             pattern: {
               value: EMAIL_REGEX,
-              message: 'Email inválido'
-            }
+              message: 'Email inválido',
+            },
           })}
           name="email"
         />
@@ -132,12 +132,12 @@ const RegisterForm = () => {
           ref={register({
             required: {
               value: true,
-              message: 'Senha obrigatória!'
+              message: 'Senha obrigatória!',
             },
             minLength: {
               value: 6,
-              message: 'Senha deve ter no mínimo 6 caracteres.'
-            }
+              message: 'Senha deve ter no mínimo 6 caracteres.',
+            },
           })}
         />
         {errors.password && (
@@ -155,12 +155,12 @@ const RegisterForm = () => {
           ref={register({
             required: {
               value: true,
-              message: 'Confirmação de Senha obrigatória!'
+              message: 'Confirmação de Senha obrigatória!',
             },
             minLength: {
               value: 6,
-              message: 'Senha deve ter no mínimo 6 caracteres.'
-            }
+              message: 'Senha deve ter no mínimo 6 caracteres.',
+            },
           })}
         />
         {errors.confirmPassword && (

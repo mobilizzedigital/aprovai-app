@@ -10,7 +10,7 @@ const UserPlanSelectModal = ({
   onSelectPlan,
   plans,
   currentPlan,
-  hasExceedMaxClients
+  hasExceedMaxClients,
 }) => (
   <Modal show={show} onHide={onHide} size="lg" centered>
     <Modal.Header className="px-5 pt-4" closeButton></Modal.Header>
@@ -39,7 +39,7 @@ const UserPlanSelectModal = ({
         </ButtonGroup>
 
         <Row className="my-5 justify-content-center">
-          {plans.map(plan => {
+          {plans.map((plan) => {
             const isUserPlan = plan.titulo === currentPlan.titulo;
 
             return (
@@ -57,7 +57,7 @@ const UserPlanSelectModal = ({
                     'p-3',
                     'h-100',
                     'rounded',
-                    isUserPlan ? 'plan-option-selected' : ''
+                    isUserPlan ? 'plan-option-selected' : '',
                   ])}
                 >
                   <h3 className="plan-option-type text-uppercase'">

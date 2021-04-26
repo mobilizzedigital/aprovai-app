@@ -17,7 +17,7 @@ const ClientsList = () => {
 
   const handleNextPage = () => setPage(page + 1);
   const handlePrevPage = () => setPage(page - 1);
-  const handleSearch = e => setTerm(e.currentTarget.value);
+  const handleSearch = (e) => setTerm(e.currentTarget.value);
 
   const addClientLink = (
     <Link className="btn btn-light btn-lg btn-icon-lg" to={ROUTES.addClient}>

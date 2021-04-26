@@ -16,7 +16,7 @@ const JobForm = ({
   showPreview,
   saving,
   actions,
-  descriptionLength
+  descriptionLength,
 }) => (
   <>
     {showPreview && (

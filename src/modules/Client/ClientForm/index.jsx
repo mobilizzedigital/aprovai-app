@@ -39,26 +39,26 @@ const ClientForm = ({ id }) => {
   const handleAddApprover = () =>
     setApprovers([
       ...approvers,
-      { id: approvers.length + 1, name: '', email: '', default: false }
+      { id: approvers.length + 1, name: '', email: '', default: false },
     ]);
 
-  const handleDeleteApprover = async index => {
+  const handleDeleteApprover = async (index) => {
     if (isEditForm) {
       try {
-        const approverEmail = approvers.filter(a => a.id === index)[0].email;
+        const approverEmail = approvers.filter((a) => a.id === index)[0].email;
         await ClientsAPI.removeApprover(approverEmail);
         addToast('Aprovador excluído com sucesso!', { appearance: 'success' });
       } catch (error) {
         addToast('Não foi possível excluir este aprovador!', {
-          appearance: 'error'
+          appearance: 'error',
         });
       }
     } else {
-      setApprovers(approvers.filter(a => a.id !== index));
+      setApprovers(approvers.filter((a) => a.id !== index));
     }
   };
 
-  const handleUpload = files =>
+  const handleUpload = (files) =>
     setFile({ dataUrl: files[0][0], file: files[0][1] });
 
   const handleGoBack = () => history.goBack();
@@ -74,7 +74,7 @@ const ClientForm = ({ id }) => {
     }
   };
 
-  const saveApprover = idCliente => approver =>
+  const saveApprover = (idCliente) => (approver) =>
     new Promise(async (resolve, reject) => {
       try {
         await ClientsAPI.saveApprover({ ...approver, idCliente });
@@ -141,14 +141,14 @@ const ClientForm = ({ id }) => {
     const fetchData = async () => {
       try {
         const {
-          data: { empresa }
+          data: { empresa },
         } = await ClientsAPI.getClient(id);
 
         if (empresa) {
           const approvers = empresa.aprovadores.reverse().map((apv, index) => ({
             id: apv.id,
             nome: apv.aprovador,
-            email: apv.emailAprovador
+            email: apv.emailAprovador,
           }));
 
           setApprovers(approvers);
@@ -181,7 +181,7 @@ const ClientForm = ({ id }) => {
     handleHideModal,
     handleShowCreateJobModal,
     handleDeleteClient,
-    handleSubmit: handleSubmit(onSubmit)
+    handleSubmit: handleSubmit(onSubmit),
   };
 
   return (

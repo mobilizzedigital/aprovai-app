@@ -11,7 +11,7 @@ const brandsMap = {
   Mastercard: () => <Master />,
   MasterCard: () => <Master />,
   Master: () => <Master />,
-  Visa: () => <Visa />
+  Visa: () => <Visa />,
 };
 
 const CreditCardBrand = ({ brand }) => <span>{brandsMap[brand]()}</span>;

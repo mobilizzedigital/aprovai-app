@@ -37,7 +37,7 @@ const DashboardStats = () => {
   }, []);
 
   /** @TODO Check this out */
-  const totalPending = jobs.filter(job => job.situacao === 'Pendente').length;
+  const totalPending = jobs.filter((job) => job.situacao === 'Pendente').length;
 
   return (
     <>
@@ -54,11 +54,11 @@ const DashboardStats = () => {
               : 'Você não tem Ajustes Pendentes'}
           </p>
           <ul className="banner-list mt-4">
-            {jobs.map(job => (
+            {jobs.map((job) => (
               <li
                 className={cn([
                   'banner-list-item d-flex',
-                  job.situacao === 'Aprovado' ? 'banner-list-item-checked' : ''
+                  job.situacao === 'Aprovado' ? 'banner-list-item-checked' : '',
                 ])}
                 key={`job_${job.id}`}
               >

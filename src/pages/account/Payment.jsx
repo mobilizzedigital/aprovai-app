@@ -11,14 +11,14 @@ const Payment = () => {
 
   usePageTitle(title);
 
-  const setPageTitle = title => setTitle(title);
+  const setPageTitle = (title) => setTitle(title);
 
   return (
     <>
       <Breadcrumb
         items={[
           { title: 'Minha conta', url: ROUTES.account },
-          { title: title, url: ROUTES.accountPayment }
+          { title: title, url: ROUTES.accountPayment },
         ]}
       />
       <Container>

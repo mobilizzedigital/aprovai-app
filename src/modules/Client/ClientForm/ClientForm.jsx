@@ -16,7 +16,7 @@ const ClientForm = ({
   saving,
   showModal,
   showDeleteModal,
-  actions
+  actions,
 }) => (
   <Form className="mb-3" onSubmit={actions.handleSubmit}>
     <Container className="pb-5">
@@ -62,7 +62,7 @@ const ClientForm = ({
                         placeholder="Nome do aprovador"
                         size="lg"
                         ref={actions.register({
-                          required: i === 0
+                          required: i === 0,
                         })}
                         name={nameKey}
                       />
@@ -88,12 +88,12 @@ const ClientForm = ({
                         ref={actions.register({
                           required: {
                             value: a.id === 1,
-                            message: 'Email obrigatório!'
+                            message: 'Email obrigatório!',
                           },
                           pattern: {
                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                            message: 'Email inválido'
-                          }
+                            message: 'Email inválido',
+                          },
                         })}
                         name={emailKey}
                       />

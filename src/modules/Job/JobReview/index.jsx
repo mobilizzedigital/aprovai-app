@@ -12,13 +12,13 @@ const JobReview = ({
   saving = false,
   onCancel = () => {},
   onConfirm = () => {},
-  onRemoveItem = () => {}
+  onRemoveItem = () => {},
 }) => {
   const [job, setJob] = useState({});
   const isEdit = !!id && id !== 'new';
   const history = useHistory();
 
-  const handleRemoveItem = itemId => {
+  const handleRemoveItem = (itemId) => {
     if (isEdit) {
       history.push(getEditJobRoute(id));
     } else {

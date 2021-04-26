@@ -10,7 +10,7 @@ const Stats = ({
   value,
   column = false,
   bordered = false,
-  link
+  link,
 }) => {
   const content = (
     <div
@@ -26,7 +26,7 @@ const Stats = ({
         'w-100',
         column ? 'flex-column p-3' : 'flex-row py-2 px-3',
         bordered ? 'stats-bordered' : '',
-        `stats-${status.replace(' ', '-').toLowerCase()}`
+        `stats-${status.replace(' ', '-').toLowerCase()}`,
       ])}
     >
       <StatusIcon status={status} size={40} />

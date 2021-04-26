@@ -34,7 +34,7 @@ const JobDashboardHeader = ({ isPackage, job, index }) => {
             'text-center',
             'status',
             `status-${statusClass}`,
-            'mr-3'
+            'mr-3',
           ])}
         >
           {status}

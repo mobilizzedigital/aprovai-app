@@ -15,7 +15,7 @@ const JobsList = ({
   perPage,
   page,
   total,
-  setPerPage
+  setPerPage,
 }) => (
   <Container>
     <SearchBar title="Jobs" value={term} onChange={handleSearch} />

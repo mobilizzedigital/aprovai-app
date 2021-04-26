@@ -8,7 +8,7 @@ import ClientDashboardComponent from './ClientDashboard';
 
 const emptyClient = {
   nome: '',
-  aprovadores: []
+  aprovadores: [],
 };
 
 const ClientDashboard = ({ isAdmin = true, id, setPageTitle }) => {
@@ -21,7 +21,7 @@ const ClientDashboard = ({ isAdmin = true, id, setPageTitle }) => {
     const fetchData = async () => {
       try {
         const {
-          data: { empresa }
+          data: { empresa },
         } = await ClientsAPI.getClient(id);
 
         setClient(empresa);
@@ -33,15 +33,15 @@ const ClientDashboard = ({ isAdmin = true, id, setPageTitle }) => {
       }
 
       const {
-        data: { projetos }
+        data: { projetos },
       } = await JobsAPI.getJobsByClient(id);
 
       const jobsByClient = {
         Aprovado: [],
         Pendente: [],
-        Ajuste: []
+        Ajuste: [],
       };
-      projetos.forEach(job => {
+      projetos.forEach((job) => {
         jobsByClient[job.situacao].push(job);
       });
       setJobs(jobsByClient);

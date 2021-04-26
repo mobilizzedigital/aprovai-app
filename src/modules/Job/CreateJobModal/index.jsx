@@ -9,7 +9,7 @@ import { ClientsAPI } from '../../../api';
 const mapClientToSelect = ({ id, nome, enderecoLogo }) => ({
   value: id,
   label: nome,
-  logo: enderecoLogo
+  logo: enderecoLogo,
 });
 
 const CreateJobModal = ({ show, onHide }) => {
@@ -27,7 +27,7 @@ const CreateJobModal = ({ show, onHide }) => {
     history.push(ROUTES.addClient);
   };
 
-  const handleSelectClient = client => setClient(client);
+  const handleSelectClient = (client) => setClient(client);
 
   const onSubmit = ({ name, type }) => {
     if (client) {
@@ -50,7 +50,7 @@ const CreateJobModal = ({ show, onHide }) => {
         setLoading(false);
         if (location.pathname.includes('/clients/')) {
           const foundClient = data.empresas.filter(
-            client => client.id === parseInt(params.id, 10)
+            (client) => client.id === parseInt(params.id, 10)
           )[0];
 
           setClient(mapClientToSelect(foundClient));

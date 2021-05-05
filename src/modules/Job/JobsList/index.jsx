@@ -13,7 +13,7 @@ const JobsList = () => {
 
   const handleNextPage = () => setPage(page + 1);
   const handlePrevPage = () => setPage(page - 1);
-  const handleSearch = e => setTerm(e.currentTarget.value);
+  const handleSearch = (e) => setTerm(e.currentTarget.value);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -36,20 +36,20 @@ const privateRoutes = [
     path: ROUTES.accountPayment,
     Component: PaymentForm,
     allowNonSubscribers: true,
-    exact: true
+    exact: true,
   },
   {
     path: ROUTES.account,
     Component: AccountWrapper,
-    allowNonSubscribers: true
+    allowNonSubscribers: true,
   },
-  { path: ROUTES.home, Component: DashboardPage, exact: true }
+  { path: ROUTES.home, Component: DashboardPage, exact: true },
 ];
 
 const publicRoutes = [
   { path: ROUTES.login, Component: LoginPage },
   { path: ROUTES.register, Component: RegisterPage },
-  { path: ROUTES.forgotPassword, Component: ForgotPasswordPage }
+  { path: ROUTES.forgotPassword, Component: ForgotPasswordPage },
 ];
 
 const App = () => {

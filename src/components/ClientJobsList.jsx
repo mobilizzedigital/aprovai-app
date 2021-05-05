@@ -14,7 +14,7 @@ const ClientJobsList = ({ label, value, status, emptyText, jobs, isAdmin }) => (
         <p className="client-jobs-list-empty text-center pt-4">{emptyText}</p>
       )}
 
-      {jobs.map(job => (
+      {jobs.map((job) => (
         <div className="client-jobs-list-item p-2" key={`job_${job.id}`}>
           <Link
             to={getJobDashboardRoute(job.id, job.tipoProjeto, isAdmin)}

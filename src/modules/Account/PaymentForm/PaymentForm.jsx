@@ -19,7 +19,7 @@ const PaymentForm = ({
   user,
   paymentHistory,
   paymentState,
-  handleChangePayment
+  handleChangePayment,
 }) => {
   const showSubmitButton =
     paymentState === PAYMENT_STATES.pay ||

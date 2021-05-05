@@ -9,7 +9,7 @@ const EmptyState = ({ shadow, text }) => (
       'bg-light',
       'rounded',
       'text-center',
-      shadow ? 'shadow' : ''
+      shadow ? 'shadow' : '',
     ])}
   >
     {text}

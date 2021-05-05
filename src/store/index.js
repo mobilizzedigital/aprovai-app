@@ -10,7 +10,7 @@ export {
   togglePlansModal,
   addTargetPlan,
   addUserPlan,
-  addPlans
+  addPlans,
 } from './actions';
 
 export {
@@ -21,11 +21,11 @@ export {
   userPlanSelector,
   plansSelector,
   targetPlanSelector,
-  hasExceedMaxClientsSelector
+  hasExceedMaxClientsSelector,
 } from './selectors';
 
 const store = configureStore({
-  reducer
+  reducer,
 });
 
 export default store;

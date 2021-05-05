@@ -6,7 +6,7 @@ import Icon from './Icon';
 const icons = {
   pendente: Icon.types.hourglass,
   aprovado: Icon.types.checkMark,
-  'em-ajuste': Icon.types.settings
+  'em-ajuste': Icon.types.settings,
 };
 
 const StatusIcon = ({ status, size = 40, className = '' }) => {
@@ -21,7 +21,7 @@ const StatusIcon = ({ status, size = 40, className = '' }) => {
         'justify-content-center',
         'status-icon',
         `status-icon-${icon}`,
-        className
+        className,
       ])}
       style={{ width: size, height: size, minWidth: size, minHeight: size }}
     >

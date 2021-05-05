@@ -18,7 +18,7 @@ export async function savePlan(token, clientId, planId, paymentType) {
       idPlanoContratacao: planId,
       idCliente: clientId,
       idFormaPagamento: paymentType,
-      quantidadeParcela: 1
+      quantidadeParcela: 1,
     },
     'application/json'
   );

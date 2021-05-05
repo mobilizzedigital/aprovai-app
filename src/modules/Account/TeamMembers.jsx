@@ -19,13 +19,13 @@ const TeamMembers = ({ team }) => {
 
   const handleToggleAddMember = () => setShowAddModal(!showAddModal);
 
-  const handleRemoveMember = async id => {
-    const { email } = members.filter(member => member.id === id)[0];
+  const handleRemoveMember = async (id) => {
+    const { email } = members.filter((member) => member.id === id)[0];
 
     try {
       await UserAPI.deleteUser(email);
       addToast('Membro excluído com sucesso!', { appearance: 'success' });
-      setMembers([...members.filter(member => member.id !== id)]);
+      setMembers([...members.filter((member) => member.id !== id)]);
     } catch (error) {
       addToast(error.message, { appearance: 'error' });
     }
@@ -40,7 +40,7 @@ const TeamMembers = ({ team }) => {
     const fetchData = async () => {
       try {
         const {
-          data: { usuarios }
+          data: { usuarios },
         } = await UserAPI.getUsersTeam();
 
         setMembers(usuarios);
@@ -53,7 +53,7 @@ const TeamMembers = ({ team }) => {
   const items = members.map(({ id, name, email }) => ({
     id,
     leftText: name,
-    greyText: `(${email})`
+    greyText: `(${email})`,
   }));
 
   return (

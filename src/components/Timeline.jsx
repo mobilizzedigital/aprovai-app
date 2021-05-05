@@ -16,7 +16,7 @@ const icons = {
   send: Icon.types.paperPlane,
   adjust: Icon.types.settings,
   view: Icon.types.eye,
-  approve: Icon.types.checkMark
+  approve: Icon.types.checkMark,
 };
 
 const Item = ({ image, author, message, comment, action, date }) => (
@@ -31,7 +31,7 @@ const Item = ({ image, author, message, comment, action, date }) => (
           'd-flex',
           'justify-content-center',
           'align-items-center',
-          `timeline-icon-${action}`
+          `timeline-icon-${action}`,
         ])}
       >
         <Icon name={icons[action]} />

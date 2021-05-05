@@ -18,7 +18,7 @@ import {
   addUser,
   addUserPlan,
   togglePlansModal,
-  showPlansModalSelector
+  showPlansModalSelector,
 } from '../store';
 
 const PrivateWrapper = ({ render, allowNonSubscribers }) => {
@@ -44,7 +44,7 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
           plano,
           perfil,
           empresa,
-          dadosCartaoIugu
+          dadosCartaoIugu,
         } = data;
 
         const situation = validateUserSubscription(
@@ -63,7 +63,7 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
             isAdmin: perfil === 'Proprietario',
             payment: assinaturaIugu,
             paymentInfo: dadosCartaoIugu,
-            companyLogo: empresa.enderecoLogo
+            companyLogo: empresa.enderecoLogo,
           })
         );
         dispatch(addUserPlan(plano));

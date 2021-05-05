@@ -15,10 +15,10 @@ const ClientDashboardPage = () => {
 
   const breadcrumb = [
     { title: 'Clientes', url: ROUTES.clients },
-    { title: title, url: getClientDashboardRoute(id) }
+    { title: title, url: getClientDashboardRoute(id) },
   ];
 
-  const handleSetPageTitle = title => setTitle(title);
+  const handleSetPageTitle = (title) => setTitle(title);
 
   return (
     <>

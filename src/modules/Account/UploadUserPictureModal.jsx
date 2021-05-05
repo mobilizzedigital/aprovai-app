@@ -13,7 +13,7 @@ const UploadUserPictureModal = ({ show, handleHide }) => {
   const dispatch = useDispatch();
   const { addToast } = useToasts();
 
-  const handleUpload = files =>
+  const handleUpload = (files) =>
     setFile({ dataUrl: files[0][0], file: files[0][1] });
 
   const handleSave = async () => {
@@ -27,7 +27,7 @@ const UploadUserPictureModal = ({ show, handleHide }) => {
     try {
       await UserAPI.saveUser(formData);
       addToast('Foto atualizada com sucesso!', {
-        appearance: 'success'
+        appearance: 'success',
       });
       dispatch(addUser({ ...user, profilePicture: file.dataUrl }));
       handleHide();

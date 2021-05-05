@@ -17,7 +17,7 @@ const UserPassword = () => {
       await UserAPI.updatePassword({
         currentPassword: oldPassword,
         password: newPassword,
-        passwordConfirmation: newPassword
+        passwordConfirmation: newPassword,
       });
       addToast('Senha atualizada com sucesso!', { appearance: 'success' });
       reset();

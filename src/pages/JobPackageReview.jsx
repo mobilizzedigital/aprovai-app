@@ -17,7 +17,7 @@ const JobPackageReview = () => {
       <Breadcrumb
         items={[
           { title: id ? 'Jobs' : 'Adicionar Job', url: ROUTES.addJob },
-          { title: 'Revisão', url: '' }
+          { title: 'Revisão', url: '' },
         ]}
         expanded={false}
       />

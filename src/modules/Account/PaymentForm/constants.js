@@ -3,7 +3,7 @@ export const ERROR_MESSAGES = {
   last_name: 'Sobrenome inválido',
   number: 'Número do cartão inválido',
   expiration: 'Data de expiração',
-  verification_value: 'Número inválido'
+  verification_value: 'Número inválido',
 };
 
 export const PAYMENT_STATES = {
@@ -12,5 +12,5 @@ export const PAYMENT_STATES = {
   update: 'update',
   view: 'view',
   error: 'error',
-  noPlanSelected: 'noPlanSelected'
+  noPlanSelected: 'noPlanSelected',
 };

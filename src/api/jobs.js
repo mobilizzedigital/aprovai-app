@@ -5,7 +5,7 @@ const path = 'Projeto';
 export async function getJobs(perPage = 10, page = 0, title) {
   const query = {
     qtdRegistro: perPage,
-    page
+    page,
   };
   if (title) {
     query.titulo = title;
@@ -15,7 +15,7 @@ export async function getJobs(perPage = 10, page = 0, title) {
 
 export async function getJobsByClient(clientId) {
   return getRequest(path, {
-    idCliente: clientId
+    idCliente: clientId,
   });
 }
 

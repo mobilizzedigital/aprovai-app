@@ -7,7 +7,7 @@ const Avatar = ({
   alt = '',
   size = 32,
   circle = false,
-  className = ''
+  className = '',
 }) => {
   const styles = { width: size, height: size, minWidth: size, minHeight: size };
   const classes = cn([
@@ -15,7 +15,7 @@ const Avatar = ({
     'm-0',
     'overflow-hidden',
     circle ? 'rounded-circle' : 'rounded',
-    className
+    className,
   ]);
   const placeholderImage = `${process.env.PUBLIC_URL}/images/placeholder.svg`;
 

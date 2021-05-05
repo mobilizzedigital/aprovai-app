@@ -43,7 +43,7 @@ const JobsListTable = ({ jobs, loading }) => {
           </tr>
         </thead>
         <tbody>
-          {jobs.map(job => (
+          {jobs.map((job) => (
             <tr key={`job_${job.id}`}>
               <td className="px-3 py-2">
                 <Link
@@ -79,7 +79,7 @@ const JobsListTable = ({ jobs, loading }) => {
                       job.situacao
                         ? job.situacao.toLowerCase().replace(' ', '-')
                         : ''
-                    }`
+                    }`,
                   ])}
                 >
                   {job.situacao}

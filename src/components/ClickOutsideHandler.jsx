@@ -6,7 +6,7 @@ import React, { useCallback, useEffect, useRef } from 'react';
 const ClickOutsideHandler = ({ onClose, children }) => {
   const ref = useRef(null);
   const escapeListener = useCallback(
-    e => {
+    (e) => {
       if (e.key === 'Escape') {
         onClose();
       }
@@ -15,7 +15,7 @@ const ClickOutsideHandler = ({ onClose, children }) => {
   );
 
   const clickListener = useCallback(
-    e => {
+    (e) => {
       if (!ref.current.contains(e.target)) {
         onClose && onClose();
       }

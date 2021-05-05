@@ -16,7 +16,7 @@ const JobDashboardFooter = ({
   requestChanges,
   approveJob,
   saving,
-  progressItems
+  progressItems,
 }) => {
   let isApproved = job.situacao === 'Aprovado';
   let disableChanges =

@@ -12,7 +12,7 @@ const Breadcrumb = ({ items, expanded = true }) => (
       'subheader',
       'bg-primary',
       'pt-4',
-      expanded ? 'pb-5' : 'pb-4'
+      expanded ? 'pb-5' : 'pb-4',
     ])}
   >
     <div className="container">

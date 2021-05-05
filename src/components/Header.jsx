@@ -12,7 +12,7 @@ const Header = ({ onClickCreateJobModal, onLogout, user }) => {
   const [toggleIcon, setToggleIcon] = useState(Icon.types.menu);
   const allowUserActions = user.situation !== 'USER_TRIAL_ENDED';
 
-  const handleToggle = isOpened =>
+  const handleToggle = (isOpened) =>
     setToggleIcon(isOpened ? Icon.types.close : Icon.types.menu);
 
   return (

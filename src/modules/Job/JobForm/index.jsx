@@ -10,7 +10,7 @@ import JobFormComponent from './JobForm';
 
 const emptyFile = { dataUrl: '', file: {} };
 
-const convertFiles = files => {
+const convertFiles = (files) => {
   return files.map(({ dataUrl }, index) => ({ id: index, endereco: dataUrl }));
 };
 
@@ -31,13 +31,13 @@ const JobForm = ({ id, name, type, client }) => {
     reset,
     setValue,
     getValues,
-    watch
+    watch,
   } = useForm();
   const descriptionValue = watch('Descricao');
   const { addToast } = useToasts();
   const history = useHistory();
 
-  const handleViewItem = i => {
+  const handleViewItem = (i) => {
     if (i !== index) {
       setIndex(i);
     }
@@ -62,7 +62,7 @@ const JobForm = ({ id, name, type, client }) => {
     }
   };
 
-  const handleRemoveItem = indexToRemove => {
+  const handleRemoveItem = (indexToRemove) => {
     const removeFileVisually = () => {
       const remainingFiles = files.filter((_, i) => i !== indexToRemove);
       if (index > remainingFiles.length - 1) {
@@ -82,7 +82,7 @@ const JobForm = ({ id, name, type, client }) => {
     }
   };
 
-  const handleUpload = readFiles => {
+  const handleUpload = (readFiles) => {
     let newFiles = [];
     let isUpdating = false;
 
@@ -92,7 +92,7 @@ const JobForm = ({ id, name, type, client }) => {
         /** Is adding more files to the list */
         newFiles = [
           ...files.filter(({ dataUrl }) => dataUrl.length > 0),
-          ...readFiles.map(([dataUrl, file]) => ({ dataUrl, file }))
+          ...readFiles.map(([dataUrl, file]) => ({ dataUrl, file })),
         ];
       } else {
         /** Is adding the initial files */
@@ -155,7 +155,7 @@ const JobForm = ({ id, name, type, client }) => {
      * since the API does not provide methods for that
      */
     if (id && filesToRemove.length > 0) {
-      filesToRemove.forEach(id => deletePackageFile(id, true));
+      filesToRemove.forEach((id) => deletePackageFile(id, true));
     }
 
     try {
@@ -163,11 +163,11 @@ const JobForm = ({ id, name, type, client }) => {
 
       await JobsAPI.addProgress({
         idProjeto: data.id,
-        situacao: id ? 'Re-enviado' : 'Enviado'
+        situacao: id ? 'Re-enviado' : 'Enviado',
       });
 
       addToast(`Job ${id ? 'editado' : 'cadastrado'} com sucesso!`, {
-        appearance: 'success'
+        appearance: 'success',
       });
       setNewlyCreatedID(data.id);
       reset();
@@ -202,7 +202,7 @@ const JobForm = ({ id, name, type, client }) => {
 
     setForm({
       Titulo: getValues('Titulo'),
-      Descricao: getValues('Descricao')
+      Descricao: getValues('Descricao'),
     });
 
     if (isPackage) {
@@ -230,9 +230,9 @@ const JobForm = ({ id, name, type, client }) => {
     const fetchJobData = async () => {
       try {
         const { data } = await JobsAPI.getJob(id);
-        const files = data.urlArquivo.map(file => ({
+        const files = data.urlArquivo.map((file) => ({
           dataUrl: file.endereco,
-          file
+          file,
         }));
 
         setValue('Titulo', data.titulo);
@@ -259,7 +259,7 @@ const JobForm = ({ id, name, type, client }) => {
     handleUpload,
     handleViewItem,
     register,
-    saveJob
+    saveJob,
   };
 
   return (

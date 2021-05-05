@@ -15,7 +15,7 @@ export function urlParamsToObject(params) {
       const [key, value] = current.split('=');
       return {
         ...acc,
-        [key]: value
+        [key]: value,
       };
     }, []);
 }
@@ -23,12 +23,12 @@ export function urlParamsToObject(params) {
 export function formatMoney(value) {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
-    currency: 'BRL'
+    currency: 'BRL',
   }).format(value);
 }
 
 export function formatTimelineItems(items) {
-  return items.map(progress => {
+  return items.map((progress) => {
     let message = '';
     let action = '';
 
@@ -64,7 +64,7 @@ export function formatTimelineItems(items) {
       comment: progress.comentario,
       date: progress.dataAndamento,
       action: action,
-      message
+      message,
     };
   });
 }
@@ -114,7 +114,7 @@ export function scrollToElement(
     },
     easeInOutQuint(t) {
       return t < 0.5 ? 16 * t * t * t * t * t : 1 + 16 * --t * t * t * t * t;
-    }
+    },
   };
 
   const start = window.pageYOffset;

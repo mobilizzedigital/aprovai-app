@@ -12,7 +12,7 @@ const JobFormFooter = ({
   isPackage,
   handleViewItem,
   handleAddItem,
-  handleCancel
+  handleCancel,
 }) => (
   <BottomBar className="d-flex flex-column flex-md-row align-items-center">
     {isPackage ? (

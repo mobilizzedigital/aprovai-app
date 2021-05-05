@@ -17,7 +17,7 @@ const DeleteAccountModal = ({ email, show, handleHide }) => {
     try {
       await UserAPI.deleteUser(user.email);
       addToast('Usuário removido com sucesso!', {
-        appearance: 'success'
+        appearance: 'success',
       });
       handleHide();
       // Removing his account

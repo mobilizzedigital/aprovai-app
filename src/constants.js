@@ -1,6 +1,6 @@
 export const JOB_TYPES = {
   separate: 'Avulso',
-  package: 'Pacote'
+  package: 'Pacote',
 };
 
 export const PROGRESS_TYPES = {
@@ -9,9 +9,9 @@ export const PROGRESS_TYPES = {
   requestedAdjust: 'Ajuste',
   sent: 'Enviado',
   reSent: 'Re-enviado',
-  viewed: 'Visualizado'
+  viewed: 'Visualizado',
 };
 
 export const HTTP_ERROR_TYPES = {
-  badRequest: 400
+  badRequest: 400,
 };

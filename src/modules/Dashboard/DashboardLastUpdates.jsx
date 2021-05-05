@@ -32,7 +32,7 @@ const DashboardLastUpdates = () => {
           </Card.Body>
         </Card>
       )}
-      {jobs.map(job => (
+      {jobs.map((job) => (
         <Card key={`update_${job.id}`} link={getJobDashboardRoute(job.id)}>
           <Card.Image src={job.enderecoLogo} />
           <Card.Body>

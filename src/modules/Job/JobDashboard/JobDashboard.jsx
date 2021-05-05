@@ -23,7 +23,7 @@ const JobDashboard = ({
   user,
   showChangesModal,
   handleCloseChangesModal,
-  progressItems
+  progressItems,
 }) => (
   <main className="mt-5 pb-5" style={{ marginBottom: 180 }}>
     <Container>
@@ -57,7 +57,7 @@ const JobDashboard = ({
                 <>
                   {timeline.length > 0 ? (
                     <Timeline>
-                      {timeline.map(timeline => (
+                      {timeline.map((timeline) => (
                         <Timeline.Item {...timeline} />
                       ))}
                     </Timeline>

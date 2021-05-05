@@ -17,7 +17,7 @@ const TokenAuth = ({ children }) => {
     const autoLogin = async () => {
       try {
         const {
-          data: { token: userToken }
+          data: { token: userToken },
         } = await UserAPI.tokenLogin(token);
 
         localStorage.setItem('aprovaai_user_token', userToken);

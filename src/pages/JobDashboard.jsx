@@ -15,7 +15,7 @@ const JobDashboardPage = () => {
 
   usePageTitle(title);
 
-  const handleSetPageTitle = title => setTitle(title);
+  const handleSetPageTitle = (title) => setTitle(title);
 
   const breadcrumb = [];
 

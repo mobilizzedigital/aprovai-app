@@ -11,7 +11,7 @@ const JobReview = ({
   saving,
   onRemoveItem,
   onCancel,
-  onConfirm
+  onConfirm,
 }) => (
   <>
     <Container className="mb-5">

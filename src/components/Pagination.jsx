@@ -10,9 +10,9 @@ const Pagination = ({
   min = 1,
   onChangePerPage,
   onNextPage,
-  onPrevPage
+  onPrevPage,
 }) => {
-  const handleChange = e => onChangePerPage(e.currentTarget.value || min);
+  const handleChange = (e) => onChangePerPage(e.currentTarget.value || min);
   const totalPages = Math.ceil(total / perPage);
   const hasPrevPage = page > 1;
   const hasNextPage = page + 1 !== totalPages;

@@ -11,12 +11,12 @@ import {
   targetPlanSelector,
   userSelector,
   userPlanSelector,
-  showPlansModalSelector
+  showPlansModalSelector,
 } from '../../../store';
 
 let userPaymentIugu = false;
 
-const errorField = errors => (...fields) =>
+const errorField = (errors) => (...fields) =>
   fields.map((field, index) => {
     if (errors[field])
       return (
@@ -59,7 +59,7 @@ const PaymentForm = ({ setPageTitle }) => {
     return {};
   };
 
-  const savePayment = async token => {
+  const savePayment = async (token) => {
     try {
       await PlanAPI.savePlan(token, user.companyId, targetPlan.id, 1);
       // Show success modal
@@ -70,12 +70,12 @@ const PaymentForm = ({ setPageTitle }) => {
     setPaying(false);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     setPaying(true);
 
-    window.Iugu.createPaymentToken(e.target, response => {
+    window.Iugu.createPaymentToken(e.target, (response) => {
       if (response.errors) {
         setErrors(response.errors);
         setPaying(false);
@@ -88,7 +88,7 @@ const PaymentForm = ({ setPageTitle }) => {
   const handleChangePayment = () => setPaymentState(PAYMENT_STATES.update);
 
   const handleChangePlan = useCallback(() => dispatch(togglePlansModal()), [
-    dispatch
+    dispatch,
   ]);
 
   useEffect(() => {
@@ -106,7 +106,7 @@ const PaymentForm = ({ setPageTitle }) => {
     const fetchPaymentHistory = async () => {
       try {
         const {
-          data: { planos }
+          data: { planos },
         } = await PlanAPI.getUserPlan();
         setPaymentHistory(planos);
       } catch (e) {}
@@ -115,7 +115,7 @@ const PaymentForm = ({ setPageTitle }) => {
     const fetchPlans = async () => {
       try {
         const {
-          data: { planos }
+          data: { planos },
         } = await PlanAPI.getPlanOptions();
 
         setPlans(planos);

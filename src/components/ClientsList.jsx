@@ -14,7 +14,7 @@ const ClientsList = ({ clients, emptyText }) => {
 
   return (
     <ul>
-      {clients.map(client => (
+      {clients.map((client) => (
         <li className="bg-white rounded shadow p-3 mb-2" key={client.id}>
           <Row className="clients-list">
             <Col md={11}>

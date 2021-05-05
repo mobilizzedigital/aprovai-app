@@ -12,7 +12,7 @@ import {
   addPlans,
   addTargetPlan,
   userPlanSelector,
-  hasExceedMaxClientsSelector
+  hasExceedMaxClientsSelector,
 } from '../../store';
 
 const UserPlan = () => {
@@ -25,8 +25,8 @@ const UserPlan = () => {
 
   const handleTogglePlansModal = () => dispatch(togglePlansModal());
 
-  const handleSelectPlan = planId => {
-    const plan = plans.filter(plan => plan.id === planId)[0];
+  const handleSelectPlan = (planId) => {
+    const plan = plans.filter((plan) => plan.id === planId)[0];
     handleTogglePlansModal();
     dispatch(addTargetPlan(plan));
     history.push(ROUTES.accountPayment);
@@ -36,7 +36,7 @@ const UserPlan = () => {
     const fetchData = async () => {
       try {
         const {
-          data: { planos }
+          data: { planos },
         } = await PlanAPI.getPlanOptions();
 
         dispatch(addPlans(planos));

@@ -9,7 +9,7 @@ const LoadingState = ({ shadow, message = 'Loading...' }) => (
       'bg-light',
       'rounded',
       'text-center',
-      shadow ? 'shadow' : ''
+      shadow ? 'shadow' : '',
     ])}
   >
     {message}

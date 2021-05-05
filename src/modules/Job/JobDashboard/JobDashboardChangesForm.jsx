@@ -7,7 +7,7 @@ import { scrollToElement } from '../../../utils';
 const JobDashboardChangesForm = ({
   handleRequestChanges,
   setRequestChanges,
-  saving
+  saving,
 }) => {
   const { register, handleSubmit, errors } = useForm();
 

@@ -14,14 +14,14 @@ const LoginForm = () => {
   const { addToast } = useToasts();
   const { register, handleSubmit, errors, reset } = useForm();
 
-  const onSubmit = async form => {
+  const onSubmit = async (form) => {
     try {
       setAuthenticating(true);
 
       const { data } = await UserAPI.login({
         userName: form.userName,
         password: form.password,
-        secret: process.env.REACT_APP_API_SECRET
+        secret: process.env.REACT_APP_API_SECRET,
       });
       const { token } = data;
 

@@ -6,3 +6,15 @@
     padding: 0 0.5rem;
   }
 }
+
+.client-avatar {
+  &__link {
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__name {
+    font-size: 10px;
+  }
+}

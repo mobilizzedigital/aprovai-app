@@ -11,14 +11,17 @@ const DashboardClients = () => {
 
   return (
     <div className="d-flex flex-wrap client-avatar-row">
-      {clients.map(({ id, enderecoLogo }) => (
+      {clients.map(({ id, nome, enderecoLogo }) => (
         <div key={`dash_client_${id}`} className="mb-md-4 client-avatar px-2">
-          <Link to={`/clients/${id}`}>
+          <Link to={`/clients/${id}`} className="client-avatar__link">
             <Avatar
               src={enderecoLogo}
               size="100%"
               className="shadow bg-light"
             />
+            <span className="client-avatar__name mt-1 text-center d-block">
+              {nome}
+            </span>
           </Link>
         </div>
       ))}

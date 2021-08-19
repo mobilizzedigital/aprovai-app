@@ -39,7 +39,7 @@ const UploadField = ({
       <input {...getInputProps({})} />
       <div
         className={cn([
-          'field-upload rounded border d-flex justify-content-center align-items-center flex-column',
+          'field-upload rounded d-flex justify-content-center align-items-center flex-column',
           !file ? 'p-4' : '',
         ])}
       >

@@ -54,3 +54,7 @@ export async function addProgress(data) {
 export async function deleteFile(fileId) {
   return await deleteRequest(`${path}/DeleteArquivo/${fileId}`);
 }
+
+export async function getCarouselId() {
+  return await getRequest(`${path}/GetCarrouselId`);
+}

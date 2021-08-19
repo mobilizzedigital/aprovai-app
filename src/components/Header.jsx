@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { NavDropdown, Navbar, Container, Button } from 'react-bootstrap';
 
 import UserAvatar from './UserAvatar';
@@ -8,8 +8,10 @@ import AdminWrapper from '../modules/AdminWrapper';
 import ROUTES from '../routes';
 import Icon from './Icon';
 
-const Header = ({ onClickCreateJobModal, onLogout, user }) => {
+const Header = ({ onLogout, user }) => {
   const [toggleIcon, setToggleIcon] = useState(Icon.types.menu);
+  const history = useHistory();
+
   const allowUserActions = user.situation !== 'USER_TRIAL_ENDED';
 
   const handleToggle = (isOpened) =>
@@ -102,12 +104,12 @@ const Header = ({ onClickCreateJobModal, onLogout, user }) => {
 
           <AdminWrapper>
             <Button
-              className="btn-highlight mt-2 mt-md-0"
-              onClick={onClickCreateJobModal}
+              className="btn-highlight mt-2 mt-md-0 w-25 text-left px-4"
+              onClick={() => history.push('/jobs/new')}
               disabled={!allowUserActions}
             >
               <span className="icon icon-plus"></span>
-              Adicionar Job
+              Enviar Job
             </Button>
           </AdminWrapper>
 

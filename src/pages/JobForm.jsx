@@ -4,7 +4,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import ROUTES from '../routes';
 import usePageTitle from '../hooks/usePageTitle';
 import Breadcrumb from '../components/Breadcrumb';
-import JobForm from '../modules/Job/JobForm';
+import JobForm from '../modules/Jobs/JobForm';
 import Page from '../components/Page';
 import { urlParamsToObject } from '../utils';
 

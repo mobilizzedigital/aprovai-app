@@ -8,7 +8,6 @@ import { UserAPI } from '../api';
 import { validateUserSubscription } from '../utils';
 import ROUTES from '../routes';
 import PageHeader from './PageHeader';
-import CreateJobModal from './Job/CreateJobModal';
 import UserPlanModal from '../modules/Account/UserPlanModal';
 import TestingPeriodModal from './TestingPeriodModal';
 import UserTrialEndedAlert from '../components/UserTrialEndedAlert';
@@ -27,10 +26,8 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
   const [situation, setSituation] = useState(null);
   const { addToast } = useToasts();
   const dispatch = useDispatch();
-  const showCreateJobModal = useSelector(showCreateJobModalSelector);
   const showPlansModal = useSelector(showPlansModalSelector);
 
-  const handleToggleCreateJobModal = () => dispatch(toggleCreateJobModal());
   const handleTogglePlansModal = () => dispatch(togglePlansModal());
 
   useEffect(() => {
@@ -102,14 +99,10 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
       {showTrialEndedAlert && (
         <UserTrialEndedAlert onSeePlans={handleTogglePlansModal} />
       )}
-      <PageHeader onClickCreateJobModal={handleToggleCreateJobModal} />
+      <PageHeader />
       {showLockOverlay && <div className="lock-overlay" />}
       {render}
-      {showTrialModal && <TestingPeriodModal />}
-      <CreateJobModal
-        show={showCreateJobModal}
-        onHide={handleToggleCreateJobModal}
-      />
+      {/* {showTrialModal && <TestingPeriodModal />} */}
       <UserPlanModal />
     </>
   );

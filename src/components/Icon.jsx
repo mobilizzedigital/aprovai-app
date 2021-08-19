@@ -2,8 +2,8 @@ import React from 'react';
 
 import { cn } from '../utils';
 
-const Icon = ({ name, screenReaderMessage, className = '' }) => (
-  <span className={cn(['icon', `icon-${name}`, className])}>
+const Icon = ({ name, screenReaderMessage, className = '', ...rest }) => (
+  <span className={cn(['icon', `icon-${name}`, className])} {...rest}>
     {screenReaderMessage && (
       <span className="sr-only">{screenReaderMessage}</span>
     )}

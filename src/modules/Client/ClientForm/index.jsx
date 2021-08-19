@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import ClientFormComponent from './ClientForm';
 import { ClientsAPI } from '../../../api';
 import ROUTES from '../../../routes';
-import { toggleCreateJobModal, togglePlansModal } from '../../../store';
+import { togglePlansModal } from '../../../store';
 import { HTTP_ERROR_TYPES } from '../../../constants';
 
 const defaultApprover = [{ id: 0, name: '', email: '', default: true }];
@@ -32,7 +32,7 @@ const ClientForm = ({ id }) => {
   const handleHideDeleteModal = () => setDeleteModal(false);
   const handleShowCreateJobModal = () => {
     handleHideModal();
-    dispatch(toggleCreateJobModal());
+    history.push('/jobs/new');
   };
   const handleShowClientsList = () => setToClientsList(true);
 

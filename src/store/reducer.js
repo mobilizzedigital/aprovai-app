@@ -5,7 +5,6 @@ import * as actions from './actions';
 const initialState = {
   user: {},
   topClients: [],
-  showCreateJobModal: false,
   showPlansModal: false,
   plans: {
     current: {},
@@ -25,11 +24,6 @@ export const reducer = createReducer(initialState, {
   [actions.addTopClients]: (state, action) => ({
     ...state,
     topClients: action.payload,
-  }),
-
-  [actions.toggleCreateJobModal]: (state) => ({
-    ...state,
-    showCreateJobModal: !state.showCreateJobModal,
   }),
 
   [actions.togglePlansModal]: (state, action) => {

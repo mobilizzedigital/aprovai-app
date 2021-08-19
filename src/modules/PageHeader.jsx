@@ -7,7 +7,7 @@ import { userSelector } from '../store';
 import { UserAPI } from '../api';
 import ROUTES from '../routes';
 
-const PageHeader = ({ onClickCreateJobModal }) => {
+const PageHeader = () => {
   const [loggedOut, setLoggedOut] = useState(false);
   const user = useSelector(userSelector);
 
@@ -23,13 +23,7 @@ const PageHeader = ({ onClickCreateJobModal }) => {
     return <Redirect to={ROUTES.login} />;
   }
 
-  return (
-    <Header
-      onClickCreateJobModal={onClickCreateJobModal}
-      onLogout={logout}
-      user={user || {}}
-    />
-  );
+  return <Header onLogout={logout} user={user || {}} />;
 };
 
 export default PageHeader;

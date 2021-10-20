@@ -92,7 +92,7 @@ const CreateJobModal = ({
                 <Form.Group controlId="name">
                   <Form.Label>Nome do job</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="textarea"
                     size="lg"
                     name="name"
                     ref={register({ required: true })}

@@ -4,7 +4,7 @@ import { Navbar, Container } from 'react-bootstrap';
 
 import ROUTES from '../routes';
 
-const MinimalHeader = ({ onClickCreateJobModal, userName }) => (
+const MinimalHeader = ({ onClickCreateJob, userName }) => (
   <Navbar bg="dark" variant="dark" expand="lg" className="header">
     <Container>
       <Link className="navbar-brand mr-4" to={ROUTES.home}>

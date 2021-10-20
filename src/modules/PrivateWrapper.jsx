@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { useToasts } from 'react-toast-notifications';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { toggleCreateJobModal, showCreateJobModalSelector } from '../store';
 import { UserAPI } from '../api';
 import { validateUserSubscription } from '../utils';
-import ROUTES from '../routes';
+import ROUTES, { getAddJobRoute } from '../routes';
 import PageHeader from './PageHeader';
-import CreateJobModal from './Job/CreateJobModal';
 import UserPlanModal from '../modules/Account/UserPlanModal';
 import TestingPeriodModal from './TestingPeriodModal';
 import UserTrialEndedAlert from '../components/UserTrialEndedAlert';
@@ -27,10 +25,19 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
   const [situation, setSituation] = useState(null);
   const { addToast } = useToasts();
   const dispatch = useDispatch();
-  const showCreateJobModal = useSelector(showCreateJobModalSelector);
   const showPlansModal = useSelector(showPlansModalSelector);
+  const history = useHistory();
+  const location = useLocation();
+  const params = useParams();
 
-  const handleToggleCreateJobModal = () => dispatch(toggleCreateJobModal());
+  const onClickCreateJob = () => {
+    if (location.pathname.includes('/clients/')) {
+      history.push(getAddJobRoute(params.id));
+    } else {
+      history.push(ROUTES.addJob);
+    }
+  };
+
   const handleTogglePlansModal = () => dispatch(togglePlansModal());
 
   useEffect(() => {
@@ -102,14 +109,10 @@ const PrivateWrapper = ({ render, allowNonSubscribers }) => {
       {showTrialEndedAlert && (
         <UserTrialEndedAlert onSeePlans={handleTogglePlansModal} />
       )}
-      <PageHeader onClickCreateJobModal={handleToggleCreateJobModal} />
+      <PageHeader onClickCreateJob={onClickCreateJob} />
       {showLockOverlay && <div className="lock-overlay" />}
       {render}
       {showTrialModal && <TestingPeriodModal />}
-      <CreateJobModal
-        show={showCreateJobModal}
-        onHide={handleToggleCreateJobModal}
-      />
       <UserPlanModal />
     </>
   );

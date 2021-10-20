@@ -151,7 +151,7 @@ const ClientForm = ({
         </Col>
         <Col md={{ offset: 1, span: 5 }}>
           <UploadField
-            file={file.dataUrl}
+            dataUrls={[file.dataUrl]}
             handleUpload={actions.handleUpload}
             infoText="Clique ou arraste uma foto de avatar do cliente"
           />

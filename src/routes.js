@@ -35,8 +35,8 @@ export function getEditClientRoute(id) {
   return `/clients/${id}/edit`;
 }
 
-export function getAddJobRoute(name, type, client) {
-  return `${ROUTES.addJob}?name=${name}&type=${type}&client=${client}`;
+export function getAddJobRoute(client) {
+  return `${ROUTES.addJob}?client=${client}`;
 }
 
 export default ROUTES;

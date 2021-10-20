@@ -48,7 +48,7 @@ const UploadUserPictureModal = ({ show, handleHide }) => {
         <Modal.Title>Faça upload da sua foto</Modal.Title>
       </Modal.Header>
       <Modal.Body className="px-5">
-        <UploadField file={file.dataUrl} handleUpload={handleUpload} />
+        <UploadField dataUrls={[file.dataUrl]} handleUpload={handleUpload} />
       </Modal.Body>
       <Modal.Footer className="px-5 pb-4 d-flex justify-content-between">
         <Button variant="light" onClick={handleHide} size="lg">

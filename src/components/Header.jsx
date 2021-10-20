@@ -8,7 +8,7 @@ import AdminWrapper from '../modules/AdminWrapper';
 import ROUTES from '../routes';
 import Icon from './Icon';
 
-const Header = ({ onClickCreateJobModal, onLogout, user }) => {
+const Header = ({ onClickCreateJob, onLogout, user }) => {
   const [toggleIcon, setToggleIcon] = useState(Icon.types.menu);
   const allowUserActions = user.situation !== 'USER_TRIAL_ENDED';
 
@@ -103,8 +103,7 @@ const Header = ({ onClickCreateJobModal, onLogout, user }) => {
           <AdminWrapper>
             <Button
               className="btn-highlight mt-2 mt-md-0"
-              onClick={onClickCreateJobModal}
-              disabled={!allowUserActions}
+              onClick={onClickCreateJob}
             >
               <span className="icon icon-plus"></span>
               Adicionar Job

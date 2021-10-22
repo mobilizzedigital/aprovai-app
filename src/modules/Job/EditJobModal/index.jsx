@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
-import AddJobModalComponent from './AddJobModal';
+import EditJobModalComponent from './EditJobModal';
 
-const AddJobModal = ({ show, onHide }) => {
+const EditJobModal = ({ show, job, onHide, onDelete, jobIndex }) => {
   const { register, handleSubmit } = useForm();
-
   const [files, setFiles] = useState([]);
   const [dataUrls, setDataUrls] = useState([]);
 
   const handleUpload = (readFiles) => {
-    let newFiles = [];
-    let newDataUrls = [];
+    const newFiles = [];
+    const newDataUrls = [];
 
     readFiles.forEach((file) => {
       newFiles.push({
@@ -25,26 +24,34 @@ const AddJobModal = ({ show, onHide }) => {
     setDataUrls(newDataUrls);
   };
 
-  const handleAddClient = (e) => {
-    onHide({ ...e, files });
+  useEffect(() => {
+    setFiles(job?.files);
+    const newDataUrls = [];
+
+    // eslint-disable-next-line no-unused-expressions
+    job?.files.map((file) => newDataUrls.push(file.url));
+
+    setDataUrls(newDataUrls);
+  }, [job]);
+
+  const handleEditClient = (e) => {
+    onHide({ ...e, files }, jobIndex);
   };
 
-  useEffect(() => {
-    setFiles([]);
-    setDataUrls([]);
-  }, [show]);
-
   return (
-    <AddJobModalComponent
+    <EditJobModalComponent
       show={show}
       onHide={onHide}
       register={register}
       handleUpload={handleUpload}
       files={files}
       dataUrls={dataUrls}
-      handleSubmit={handleSubmit(handleAddClient)}
+      jobIndex={jobIndex}
+      job={job}
+      handleSubmit={handleSubmit(handleEditClient)}
+      onDelete={onDelete}
     />
   );
 };
 
-export default AddJobModal;
+export default EditJobModal;

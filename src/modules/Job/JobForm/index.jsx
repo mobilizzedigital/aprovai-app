@@ -4,7 +4,6 @@ import { useToasts } from 'react-toast-notifications';
 import { useHistory, useLocation } from 'react-router-dom';
 
 import { JobsAPI, ClientsAPI } from '../../../api';
-import { JOB_TYPES } from '../../../constants';
 import ROUTES from '../../../routes';
 import JobFormComponent from './JobForm';
 
@@ -22,15 +21,17 @@ const mapClientToSelect = ({ id, nome, enderecoLogo }) => ({
 
 const JobForm = ({ id, name, type }) => {
   const [files, setFiles] = useState([emptyFile]);
+  const [toRefresh, setToRefresh] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [index, setIndex] = useState(0);
   const [newlyCreatedID, setNewlyCreatedID] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
   const [form, setForm] = useState({});
   const [jobs, setJobs] = useState([]);
+  const [jobToEdit, setJobToEdit] = useState();
+  const [jobIndexToEdit, setJobIndexToEdit] = useState();
   const [saving, setSaving] = useState(false);
-  const [isPackage, setIsPackage] = useState(type === JOB_TYPES.package);
-  // const [clientId, setClientId] = useState(client);
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(true);
   const [client, setClient] = useState(null);
@@ -48,9 +49,41 @@ const JobForm = ({ id, name, type }) => {
   };
 
   const onAddJobModalHide = (job) => {
+    if (job && job.name) setJobs([...jobs, job]);
     setShowAddModal(false);
+  };
 
-    if (job) setJobs([...jobs, job]);
+  const openEditJobModal = (jobIndex) => {
+    setJobIndexToEdit(jobIndex);
+    setJobToEdit(jobs[jobIndex]);
+    setShowEditModal(true);
+  };
+
+  const onEditJobModalHide = (job, jobIndex) => {
+    const jobsToEdit = jobs;
+    jobsToEdit[jobIndex] = job;
+    setJobs(jobsToEdit);
+    setShowEditModal(false);
+  };
+
+  const onDeleteJob = (jobIndex) => {
+    setJobs((currentJobs) => currentJobs.filter((job, i) => i !== jobIndex));
+    setShowEditModal(false);
+  };
+
+  const handleAttachNew = (readFiles, jobIndex) => {
+    const job = jobs[jobIndex];
+    const updatedJobs = jobs;
+    readFiles.forEach((file) => {
+      job.files.push({
+        url: file[0],
+        name: file[1].name,
+      });
+    });
+    updatedJobs[jobIndex] = job;
+
+    setToRefresh(!toRefresh);
+    setJobs(updatedJobs);
   };
 
   const handleAddItem = () => {
@@ -73,14 +106,13 @@ const JobForm = ({ id, name, type }) => {
   };
 
   const handleRemoveFile = (jobIndex, fileIndex) => {
-    console.log('to remove');
-    if (jobIndex !== undefined && fileIndex !== undefined) {
-      const job = jobs[jobIndex];
-      const updatedJobs = jobs;
-      job.files.splice(fileIndex, 1);
-      updatedJobs[jobIndex] = job;
-      setJobs(updatedJobs);
-    }
+    const job = jobs[jobIndex];
+    const updatedJobs = jobs;
+    job.files.splice(fileIndex, 1);
+    updatedJobs[jobIndex] = job;
+
+    setToRefresh(!toRefresh);
+    setJobs(updatedJobs);
   };
 
   const handleRemoveItem = (indexToRemove) => {
@@ -184,12 +216,6 @@ const JobForm = ({ id, name, type }) => {
       Titulo: getValues('Titulo'),
       Descricao: getValues('Descricao'),
     });
-
-    if (isPackage) {
-      setShowPreview(true);
-    } else {
-      saveJob();
-    }
   };
 
   useEffect(() => {
@@ -245,7 +271,6 @@ const JobForm = ({ id, name, type }) => {
         setValue('Titulo', data.titulo);
         setValue('Descricao', data.descricao);
         setFiles(files);
-        setIsPackage(data.tipoProjeto === JOB_TYPES.package);
       } catch (e) {}
     };
 
@@ -275,7 +300,6 @@ const JobForm = ({ id, name, type }) => {
       files={files}
       form={form}
       index={index}
-      isPackage={isPackage}
       newlyCreatedID={newlyCreatedID}
       showPreview={showPreview}
       saving={saving}
@@ -283,12 +307,19 @@ const JobForm = ({ id, name, type }) => {
       openAddJobModal={openAddJobModal}
       onAddJobModalHide={onAddJobModalHide}
       showAddModal={showAddModal}
+      openEditJobModal={openEditJobModal}
+      onEditJobModalHide={onEditJobModalHide}
+      showEditModal={showEditModal}
+      jobToEdit={jobToEdit}
+      jobIndexToEdit={jobIndexToEdit}
       client={client}
       showErrorClient={showErrorClient}
       clientsData={clientsData}
       handleSelectClient={handleSelectClient}
       jobs={jobs}
       handleRemoveFile={handleRemoveFile}
+      handleAttachNew={handleAttachNew}
+      onDeleteJob={onDeleteJob}
     />
   );
 };

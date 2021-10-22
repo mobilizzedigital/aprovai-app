@@ -10,6 +10,7 @@ import Icon from '../../../components/Icon';
 import LoadingState from '../../../components/LoadingState';
 import Avatar from '../../../components/Avatar';
 import AddJobModal from '../AddJobModal';
+import EditJobModal from '../EditJobModal';
 
 const Control = (props) => {
   const value = props.getValue();
@@ -57,7 +58,6 @@ const JobForm = ({
   files,
   form,
   index,
-  isPackage,
   newlyCreatedID,
   showPreview,
   saving,
@@ -72,11 +72,19 @@ const JobForm = ({
   register,
   openPopup,
   openAddJobModal,
-  onAddJobModalHide,
   showAddModal,
+  onAddJobModalHide,
   handleAddJobModalSubmit,
+  openEditJobModal,
+  showEditModal,
+  onEditJobModalHide,
+  handleEditJobModalSubmit,
+  jobToEdit,
+  jobIndexToEdit,
   jobs,
   handleRemoveFile,
+  handleAttachNew,
+  onDeleteJob,
 }) => (
   <>
     {showPreview && (
@@ -161,28 +169,6 @@ const JobForm = ({
                   </>
                 )}
               </Form.Group>
-
-              {isPackage && (
-                <div className="d-flex justify-content-end mt-5 pb-4">
-                  {files.length > 1 && (
-                    <Button
-                      variant="light"
-                      size="lg"
-                      onClick={() => actions.handleRemoveItem(index)}
-                    >
-                      Excluir item
-                    </Button>
-                  )}
-                  <Button
-                    variant="primary"
-                    size="lg"
-                    className="ml-5"
-                    onClick={actions.handleAddItem}
-                  >
-                    Adicionar item
-                  </Button>
-                </div>
-              )}
             </Col>
             <Col
               md={{ offset: 1, span: 5 }}
@@ -198,6 +184,8 @@ const JobForm = ({
                     description={job.description}
                     handleRemoveFile={handleRemoveFile}
                     jobIndex={jobIndex}
+                    handleAttachNew={handleAttachNew}
+                    openEditJobModal={openEditJobModal}
                   />
                 ))}
                 <li className="bg-white rounded shadow p-3">
@@ -220,7 +208,6 @@ const JobForm = ({
           files={files}
           index={index}
           saving={saving}
-          isPackage={isPackage}
           handleViewItem={actions.handleViewItem}
           handleAddItem={actions.handleAddItem}
           handleCancel={actions.handleCancel}
@@ -233,10 +220,20 @@ const JobForm = ({
       newlyCreatedID={newlyCreatedID}
       onHide={actions.handleHideSentModal}
     />
+
     <AddJobModal
       handleSubmit={handleAddJobModalSubmit}
       onHide={onAddJobModalHide}
       show={showAddModal}
+    />
+
+    <EditJobModal
+      job={jobToEdit}
+      handleSubmit={handleEditJobModalSubmit}
+      onHide={onEditJobModalHide}
+      show={showEditModal}
+      jobIndex={jobIndexToEdit}
+      onDelete={onDeleteJob}
     />
   </>
 );

@@ -13,24 +13,10 @@ const JobFormFooter = ({
   handleViewItem,
   handleAddItem,
   handleCancel,
+  showPreview,
 }) => (
   <BottomBar className="d-flex flex-column flex-md-row align-items-center">
-    {isPackage ? (
-      <IndexMenu className="mb-3 mb-md-0">
-        {files.map((_, i) => (
-          <IndexMenu.Item
-            key={`file_index_${i}`}
-            onClick={() => handleViewItem(i)}
-            index={i + 1}
-            active={i === index}
-          />
-        ))}
-        <IndexMenu.AddItem onClick={handleAddItem} />
-      </IndexMenu>
-    ) : (
-      <div />
-    )}
-
+    <div />
     <div className="d-flex">
       <Button
         variant="light"
@@ -38,14 +24,14 @@ const JobFormFooter = ({
         className="px-md-5"
         onClick={handleCancel}
       >
-        Cancelar
+        {showPreview ? 'Voltar' : 'Cancelar'}
       </Button>
       <LoadingSpinnerButton
         variant="success"
         loading={saving}
         className="ml-2 ml-md-5 px-md-5"
       >
-        {isPackage ? 'Conluir e revisar' : 'Enviar para o cliente'}
+        {!showPreview ? 'Conluir e revisar' : 'Enviar para o cliente'}
       </LoadingSpinnerButton>
     </div>
   </BottomBar>

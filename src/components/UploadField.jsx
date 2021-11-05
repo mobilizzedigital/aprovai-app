@@ -51,10 +51,10 @@ const UploadField = ({
               <img className="field-upload-image" src={dataUrls} alt="" />
             ) : (
               <div className="container w-100 h-100 d-block position-relative">
-                <div className="row">
+                <div className="row h-50">
                   {dataUrls[0] ? (
                     <img
-                      className="col img-thumbnail m-1"
+                      className="col img-thumbnail m-1 w-100"
                       src={dataUrls[0]}
                       alt=""
                     />
@@ -71,7 +71,7 @@ const UploadField = ({
                     <div className="col m-1"></div>
                   )}
                 </div>
-                <div className="row">
+                <div className="row h-50">
                   {dataUrls[2] ? (
                     <img
                       className="col img-thumbnail m-1"

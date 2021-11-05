@@ -26,11 +26,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-close:before {
-  content: '\e912';
+.icon-right-arrow:before {
+  content: '\e915';
+}
+.icon-left-arrow:before {
+  content: '\e914';
 }
 .icon-menu:before {
   content: '\e913';
+}
+.icon-close:before {
+  content: '\e912';
 }
 .icon-warning:before {
   content: '\e911';

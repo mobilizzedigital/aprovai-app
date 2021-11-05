@@ -27,16 +27,16 @@ const JobListItem = ({
         editar
       </Button>
     </div>
-    <table className="jobs-list-table bg-white w-100 my-2 border-top border-bottom">
+    <table className="jobs-list-table bg-white w-100 mt-2 border-top border-bottom">
       <tbody>
         {files?.length > 0 ? (
           files.map((file, index) => (
-            <tr className="text-center" key={index}>
-              <td className="d-flex py-2">
+            <tr className="text-left border-top" key={index}>
+              <td className="d-flex py-2 align-items-center border-0">
                 <Avatar src={file.url} className="mr-3" />
                 <span>{file.name}</span>
               </td>
-              <td className="mr-0 py-2">
+              <td className="mr-0 py-2 border-0">
                 <Button
                   onClick={() => handleRemoveFile(jobIndex, index)}
                   variant="light"
@@ -51,7 +51,7 @@ const JobListItem = ({
         )}
       </tbody>
     </table>
-    <Button variant="light" size="lg">
+    <Button variant="light" size="lg" className="my-2">
       <UploadField
         handleUpload={(readFiles) => handleAttachNew(readFiles, jobIndex)}
         multiple
@@ -61,7 +61,7 @@ const JobListItem = ({
       </UploadField>
     </Button>
     <div className="border-top w-100 m-0 p-1">
-      <p>{description}</p>
+      <p className="text-center text-break mt-3">{description}</p>
     </div>
   </li>
 );

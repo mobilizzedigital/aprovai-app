@@ -24,6 +24,9 @@ const JobForm = ({ id, name, type }) => {
   const [toRefresh, setToRefresh] = useState(false);
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [previewElementId, setPreviewElementId] = useState(0);
+  const [previewJobId, setPreviewJobId] = useState(0);
   const [index, setIndex] = useState(0);
   const [newlyCreatedID, setNewlyCreatedID] = useState(null);
   const [showPreview, setShowPreview] = useState(false);
@@ -43,6 +46,26 @@ const JobForm = ({ id, name, type }) => {
   const { addToast } = useToasts();
   const history = useHistory();
   const query = new URLSearchParams(useLocation().search);
+
+  const onPreviewChange = (job, destiny) => {
+    if (destiny === 'next' && previewElementId + 1 < job.files.length) {
+      console.log(previewElementId + 1);
+      setPreviewElementId(previewElementId + 1);
+    } else if (destiny === 'previews' && previewElementId - 1 >= 0) {
+      console.log(previewElementId - 1);
+      setPreviewElementId(previewElementId - 1);
+    }
+  };
+
+  const openPreviewElementModal = (jobId, elementId) => {
+    setPreviewElementId(elementId);
+    setPreviewJobId(jobId);
+    setShowPreviewModal(true);
+  };
+
+  const onPreviewModalHide = () => {
+    setShowPreviewModal(false);
+  };
 
   const openAddJobModal = () => {
     setShowAddModal(true);
@@ -84,12 +107,6 @@ const JobForm = ({ id, name, type }) => {
 
     setToRefresh(!toRefresh);
     setJobs(updatedJobs);
-  };
-
-  const handleAddItem = () => {
-    const newFiles = [...files, emptyFile];
-    setFiles(newFiles);
-    setIndex(newFiles.length - 1);
   };
 
   const deletePackageFile = async (id, silent = false) => {
@@ -136,72 +153,75 @@ const JobForm = ({ id, name, type }) => {
   };
 
   const handleHideSentModal = () => history.push(ROUTES.jobs);
-  const handleCancel = () => history.goBack();
-  const handleCancelPreview = () => setShowPreview(false);
   const handleSelectClient = (client) => setClient(client);
+  const handleCancel = () => {
+    if (showPreview) {
+      setShowPreview(false);
+
+      return;
+    }
+    history.goBack();
+  };
 
   const saveJob = async () => {
     const formData = new FormData();
 
-    if (id) {
-      formData.append('Id', parseInt(id, 10));
-    } else {
-      formData.append('TipoProjeto', type);
-    }
-    formData.append('Titulo', form.Titulo || getValues('Titulo'));
-
-    const description = form.Descricao || getValues('Descricao');
-    if (description) {
-      formData.append('Descricao', description);
-    }
-    // formData.append('IdCliente', clientId);
-
-    files.forEach(({ file }, index) => {
-      formData.append(`file_${index}`, file);
+    jobs.forEach(({ job }, index) => {
+      formData.append(`job_${index}`, job);
     });
 
-    setSaving(true);
+    let body = {
+      title: getValues('name'),
+      clientId: client.value,
+      jobs: jobs,
+    };
 
-    /**
-     * Delete any file from package that has been updated
-     * since the API does not provide methods for that
-     */
-    if (id && filesToRemove.length > 0) {
-      filesToRemove.forEach((id) => deletePackageFile(id, true));
-    }
+    console.log(body);
+    // setSaving(true);
 
-    try {
-      const { data } = await JobsAPI.saveJob(formData);
+    // /**
+    //  * Delete any file from package that has been updated
+    //  * since the API does not provide methods for that
+    //  */
+    // if (id && filesToRemove.length > 0) {
+    //   filesToRemove.forEach((id) => deletePackageFile(id, true));
+    // }
 
-      await JobsAPI.addProgress({
-        idProjeto: data.id,
-        situacao: id ? 'Re-enviado' : 'Enviado',
-      });
+    // try {
+    //   const { data } = await JobsAPI.saveJob(formData);
 
-      addToast(`Job ${id ? 'editado' : 'cadastrado'} com sucesso!`, {
-        appearance: 'success',
-      });
-      setNewlyCreatedID(data.id);
-      reset();
-    } catch (error) {
-      addToast(error.message, { appearance: 'error' });
-    }
+    //   await JobsAPI.addProgress({
+    //     idProjeto: data.id,
+    //     situacao: id ? 'Re-enviado' : 'Enviado',
+    //   });
 
-    setSaving(false);
+    //   addToast(`Job ${id ? 'editado' : 'cadastrado'} com sucesso!`, {
+    //     appearance: 'success',
+    //   });
+    //   setNewlyCreatedID(data.id);
+    //   reset();
+    // } catch (error) {
+    //   addToast(error.message, { appearance: 'error' });
+    // }
+
+    // setSaving(false);
   };
 
   const validateFileByFile = () => {
     let hasEmptyFile = false;
 
-    files.forEach(({ dataUrl }, index) => {
-      if (dataUrl === '') {
-        hasEmptyFile = true;
+    jobs.forEach((job) => {
+      console.log(job);
+      job.files.forEach(({ dataUrl }, index) => {
+        if (dataUrl === '') {
+          hasEmptyFile = true;
 
-        const message =
-          'Ops, falta anexar a imagem que deseja que seu cliente aprove!';
+          const message =
+            'Ops, falta anexar as imagens que deseja que seu cliente aprove!';
 
-        addToast(message, { appearance: 'error' });
-      }
+          addToast(message, { appearance: 'error' });
+        }
+      });
     });
 
     return hasEmptyFile;
@@ -216,6 +236,13 @@ const JobForm = ({ id, name, type }) => {
       Titulo: getValues('Titulo'),
       Descricao: getValues('Descricao'),
     });
+
+    if (!showPreview) {
+      setShowPreview(true);
+    } else {
+      setShowPreview(false);
+      saveJob();
+    }
   };
 
   useEffect(() => {
@@ -283,9 +310,7 @@ const JobForm = ({ id, name, type }) => {
 
   const actions = {
     convertFiles,
-    handleAddItem,
     handleCancel,
-    handleCancelPreview,
     handleHideSentModal,
     handleRemoveItem,
     handleSubmit: handleSubmit(onSubmit),
@@ -304,22 +329,28 @@ const JobForm = ({ id, name, type }) => {
       showPreview={showPreview}
       saving={saving}
       descriptionLength={descriptionValue ? descriptionValue.length : 0}
+      handleSelectClient={handleSelectClient}
+      handleRemoveFile={handleRemoveFile}
+      handleAttachNew={handleAttachNew}
       openAddJobModal={openAddJobModal}
-      onAddJobModalHide={onAddJobModalHide}
-      showAddModal={showAddModal}
       openEditJobModal={openEditJobModal}
+      onAddJobModalHide={onAddJobModalHide}
       onEditJobModalHide={onEditJobModalHide}
+      onDeleteJob={onDeleteJob}
+      onPreviewChange={onPreviewChange}
+      showAddModal={showAddModal}
       showEditModal={showEditModal}
+      showErrorClient={showErrorClient}
+      showPreviewModal={showPreviewModal}
       jobToEdit={jobToEdit}
       jobIndexToEdit={jobIndexToEdit}
       client={client}
-      showErrorClient={showErrorClient}
       clientsData={clientsData}
-      handleSelectClient={handleSelectClient}
       jobs={jobs}
-      handleRemoveFile={handleRemoveFile}
-      handleAttachNew={handleAttachNew}
-      onDeleteJob={onDeleteJob}
+      openPreviewElementModal={openPreviewElementModal}
+      onPreviewModalHide={onPreviewModalHide}
+      previewElementId={previewElementId}
+      previewJobId={previewJobId}
     />
   );
 };

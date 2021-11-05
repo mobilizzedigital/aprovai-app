@@ -2,8 +2,11 @@ import React from 'react';
 
 import { cn } from '../utils';
 
-const Icon = ({ name, screenReaderMessage, className = '' }) => (
-  <span className={cn(['icon', `icon-${name}`, className])}>
+const Icon = ({ name, screenReaderMessage, className = '', size = 16 }) => (
+  <span
+    className={cn(['icon', `icon-${name}`, className])}
+    style={{ fontSize: `${size}px` }}
+  >
     {screenReaderMessage && (
       <span className="sr-only">{screenReaderMessage}</span>
     )}
@@ -31,6 +34,8 @@ Icon.types = {
   warning: 'warning',
   menu: 'menu',
   close: 'close',
+  left: 'left-arrow',
+  right: 'right-arrow',
 };
 
 export default Icon;

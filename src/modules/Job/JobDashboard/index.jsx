@@ -166,7 +166,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
   const handleApprove = () => {
     setSaving(true);
-    // TODO approveFile();
+    approveFile();
   };
 
   const getTimelineItemsFiltered = () => {

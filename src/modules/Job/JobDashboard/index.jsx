@@ -16,13 +16,13 @@ const JobDashboard = ({ id, setPageTitle }) => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [index, setIndex] = useState(null);
+  const [fileIndex, setFileIndex] = useState(null);
   const [timeline, setTimeline] = useState([]);
   const [requestChanges, setRequestChanges] = useState(false);
   const [showChangesModal, setShowChangesModal] = useState(false);
   const { addToast } = useToasts();
   const user = useSelector(userSelector);
   const jobType = job.tipoProjeto ? job.tipoProjeto : JOB_TYPES.separate;
-  const isPackage = jobType === JOB_TYPES.package;
   const history = useHistory();
 
   const handleCloseChangesModal = () => history.push(ROUTES.home);
@@ -36,10 +36,6 @@ const JobDashboard = ({ id, setPageTitle }) => {
       situacao: PROGRESS_TYPES.requestedAdjust,
     };
 
-    if (isPackage) {
-      data.idArquivo = job.urlArquivo[index].id;
-    }
-
     try {
       await JobsAPI.addProgress(data);
       // Update the timeline items so that it can shows the next item to be approved
@@ -48,21 +44,22 @@ const JobDashboard = ({ id, setPageTitle }) => {
       setRequestChanges(false);
       setTimeline(timeline.andamentos);
 
-      if (isPackage) {
-        const hasMoreFilesToValidate = showNextFileToValidateIfExists(
-          job.urlArquivo,
-          timeline.andamentos
-        );
-        if (hasMoreFilesToValidate) {
-          addToast('Ajuste no item solicitado com sucesso!', {
-            appearance: 'success',
-          });
-        } else {
-          setShowChangesModal(true);
-        }
-      } else {
-        setShowChangesModal(true);
-      }
+      // TODO
+      // if (isPackage) {
+      //   const hasMoreFilesToValidate = showNextFileToValidateIfExists(
+      //     job.urlArquivo,
+      //     timeline.andamentos
+      //   );
+      //   if (hasMoreFilesToValidate) {
+      //     addToast('Ajuste no item solicitado com sucesso!', {
+      //       appearance: 'success',
+      //     });
+      //   } else {
+      //     setShowChangesModal(true);
+      //   }
+      // } else {
+      //   setShowChangesModal(true);
+      // }
     } catch (error) {
       setSaving(false);
     }
@@ -128,6 +125,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
         }),
       };
       setJob(jobUpdated);
+      console.log(jobUpdated);
       // File approved, should now check for more files to be approved
       const hasMoreFilesToValidate = showNextFileToValidateIfExists(
         jobUpdated.urlArquivo,
@@ -168,7 +166,7 @@ const JobDashboard = ({ id, setPageTitle }) => {
 
   const handleApprove = () => {
     setSaving(true);
-    isPackage ? approveFile() : approveJob();
+    // TODO approveFile();
   };
 
   const getTimelineItemsFiltered = () => {
@@ -257,6 +255,10 @@ const JobDashboard = ({ id, setPageTitle }) => {
   useEffect(handleSetViewedTimeline, [index]);
 
   useEffect(() => {
+    setFileIndex(0);
+  }, [index]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await JobsAPI.getJob(id);
@@ -285,13 +287,14 @@ const JobDashboard = ({ id, setPageTitle }) => {
       client={client}
       handleRequestChanges={handleRequestChanges}
       index={index || 0}
-      isPackage={isPackage}
+      fileIndex={fileIndex || 0}
       job={job}
       timeline={formatTimelineItems(progressItems)}
       progressItems={progressItems}
       requestChanges={requestChanges}
       saving={saving}
       setIndex={setIndex}
+      setFileIndex={setFileIndex}
       setRequestChanges={setRequestChanges}
       showChangesModal={showChangesModal}
       handleCloseChangesModal={handleCloseChangesModal}

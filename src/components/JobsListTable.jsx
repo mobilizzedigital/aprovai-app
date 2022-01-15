@@ -29,9 +29,6 @@ const JobsListTable = ({ jobs, loading }) => {
               Cliente
             </th>
             <th className="px-3 pt-3 pb-2 text-uppercase font-weight-normal">
-              Tipo
-            </th>
-            <th className="px-3 pt-3 pb-2 text-uppercase font-weight-normal">
               Última Atualização
             </th>
             <th className="px-3 pt-3 pb-2 text-uppercase font-weight-normal">
@@ -47,18 +44,12 @@ const JobsListTable = ({ jobs, loading }) => {
             <tr key={`job_${job.id}`}>
               <td className="px-3 py-2">
                 <Link
-                  to={getJobDashboardRoute(job.id, job.tipoProjeto)}
+                  to={getJobDashboardRoute(job.id)}
                   className="d-flex align-items-center"
                 >
                   <Avatar src={job.enderecoLogo} className="mr-3" />
                   {job.titulo}
                 </Link>
-              </td>
-              <td className="px-3 py-2">
-                {job.tipoProjeto}{' '}
-                {job.tipoProjeto === JOB_TYPES.package
-                  ? `(${job.qtdImagem})`
-                  : ''}
               </td>
               <td className="px-3 py-2">
                 {format(

@@ -7,9 +7,11 @@ import JobDashboardChangesForm from './JobDashboardChangesForm';
 import Timeline from '../../../components/Timeline';
 import Avatar from '../../../components/Avatar';
 import JobChangesRequestedModal from '../../../components/modals/JobChangesRequestedModal';
+import JobDashboardImageHandler from './JobDashboardImageHandler';
 
 const JobDashboard = ({
   index,
+  fileIndex,
   job,
   client,
   isPackage,
@@ -17,6 +19,7 @@ const JobDashboard = ({
   handleRequestChanges,
   timeline,
   setIndex,
+  setFileIndex,
   setRequestChanges,
   approveJob,
   saving,
@@ -29,11 +32,20 @@ const JobDashboard = ({
     <Container>
       <Row>
         <Col md={4}>
-          <img
-            className="w-100 mb-3"
-            src={job.urlArquivo[index].endereco}
-            alt=""
-          />
+          <div>
+            <JobDashboardImageHandler
+              setFileIndex={setFileIndex}
+              fileIndex={fileIndex}
+              files={job.detalhes[index].arquivos}
+            />
+          </div>
+          <div className="bg-white rounded shadow p-3 text-break">
+            <strong>Descrição</strong>
+            <p>
+              {job.detalhes[index].collectionDescription ??
+                'afsdasdfadsfafsdasdfadsfafsdasdfadsfafsdasdfadsfafsdasdfadsf'}
+            </p>
+          </div>
         </Col>
         <Col md={{ span: 6, offset: 2 }}>
           <Row>
@@ -41,11 +53,7 @@ const JobDashboard = ({
               <Avatar src={client.enderecoLogo} size={56} />
             </Col>
             <Col xs={12} md={10}>
-              <JobDashboardHeader
-                isPackage={isPackage}
-                job={job}
-                index={index}
-              />
+              <JobDashboardHeader job={job} index={index} />
 
               {requestChanges ? (
                 <JobDashboardChangesForm
@@ -71,7 +79,6 @@ const JobDashboard = ({
     </Container>
 
     <JobDashboardFooter
-      isPackage={isPackage}
       job={job}
       setIndex={setIndex}
       user={user}

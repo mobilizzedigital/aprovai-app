@@ -166,18 +166,49 @@ const JobForm = ({ id, name, type }) => {
   const saveJob = async () => {
     const formData = new FormData();
 
-    jobs.forEach(({ job }, index) => {
-      formData.append(`job_${index}`, job);
+    formData.append('Titulo', getValues('name'));
+    formData.append('IdCliente', client.value);
+
+    jobs.forEach((job) => {
+      //     collectionDescription: job.description,
+      //     collectionName: job.name
+
+      formData.append('Detalhes');
     });
 
-    let body = {
-      title: getValues('name'),
-      clientId: client.value,
-      jobs: jobs,
-    };
+    formData.append(
+      'Detalhes',
+      'test'
+      // nao funciona passar um object por Multipart Content-Type
+      // jobs.map(job => (
+      //   {
+      //     arquivos: job.files.map(file => (
+      //       {
+      //         endereco: file.url,
+      //         nome: file.name
+      //       }
+      //     )),
+      //     collectionDescription: job.description,
+      //     collectionName: job.name
+      //   }
+      // ))
+    );
 
-    console.log(body);
-    // setSaving(true);
+    console.log(
+      jobs.map((job) => ({
+        arquivos: job.files.map((file) => ({
+          Endereco: file.url,
+          Nome: file.name,
+        })),
+        collectionDescription: job.description,
+        collectionName: job.name,
+      }))
+    );
+
+    console.log(formData.getAll('Detalhes'));
+    console.log(formData);
+
+    setSaving(true);
 
     // /**
     //  * Delete any file from package that has been updated
@@ -187,31 +218,30 @@ const JobForm = ({ id, name, type }) => {
     //   filesToRemove.forEach((id) => deletePackageFile(id, true));
     // }
 
-    // try {
-    //   const { data } = await JobsAPI.saveJob(formData);
+    try {
+      const { data } = await JobsAPI.saveJob(formData);
 
-    //   await JobsAPI.addProgress({
-    //     idProjeto: data.id,
-    //     situacao: id ? 'Re-enviado' : 'Enviado',
-    //   });
+      await JobsAPI.addProgress({
+        idProjeto: data.id,
+        situacao: id ? 'Re-enviado' : 'Enviado',
+      });
 
-    //   addToast(`Job ${id ? 'editado' : 'cadastrado'} com sucesso!`, {
-    //     appearance: 'success',
-    //   });
-    //   setNewlyCreatedID(data.id);
-    //   reset();
-    // } catch (error) {
-    //   addToast(error.message, { appearance: 'error' });
-    // }
+      addToast(`Job ${id ? 'editado' : 'cadastrado'} com sucesso!`, {
+        appearance: 'success',
+      });
+      setNewlyCreatedID(data.id);
+      reset();
+    } catch (error) {
+      addToast(error.message, { appearance: 'error' });
+    }
 
-    // setSaving(false);
+    setSaving(false);
   };
 
   const validateFileByFile = () => {
     let hasEmptyFile = false;
 
     jobs.forEach((job) => {
-      console.log(job);
       job.files.forEach(({ dataUrl }, index) => {
         if (dataUrl === '') {
           hasEmptyFile = true;

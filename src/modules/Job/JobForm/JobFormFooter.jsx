@@ -30,6 +30,7 @@ const JobFormFooter = ({
         variant="success"
         loading={saving}
         className="ml-2 ml-md-5 px-md-5"
+        onClick={handleAddItem}
       >
         {!showPreview ? 'Conluir e revisar' : 'Enviar para o cliente'}
       </LoadingSpinnerButton>

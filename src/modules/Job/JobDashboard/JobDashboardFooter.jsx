@@ -7,7 +7,6 @@ import IndexMenu from '../../../components/IndexMenu';
 import ROUTES, { getEditJobRoute } from '../../../routes';
 
 const JobDashboardFooter = ({
-  isPackage,
   job,
   setIndex,
   user,
@@ -23,22 +22,20 @@ const JobDashboardFooter = ({
     job.situacao !== 'Pendente de Aprovação' && job.situacao !== 'Pendente';
   let approveBtnText = 'Aprovar';
 
-  if (isPackage) {
-    const file = job.urlArquivo[index];
-    isApproved = file.situacao === 'Aprovado';
+  const file = job.detalhes[index];
+  isApproved = file.situacao === 'Aprovado';
 
-    /**
-     * Check the status of the last item of the timeline of the active file
-     */
-    if (progressItems.length > 0) {
-      disableChanges =
-        isApproved ||
-        progressItems[progressItems.length - 1].situacao === 'Ajuste';
-    }
+  /**
+   * Check the status of the last item of the timeline of the active file
+   */
+  if (progressItems.length > 0) {
+    disableChanges =
+      isApproved ||
+      progressItems[progressItems.length - 1].situacao === 'Ajuste';
+  }
 
-    if (index < job.urlArquivo.length - 1) {
-      approveBtnText = 'Aprovar e ir ao próximo';
-    }
+  if (index < job.detalhes.length - 1) {
+    approveBtnText = 'Aprovar e ir ao próximo';
   }
 
   const adminButtons = (
@@ -69,7 +66,7 @@ const JobDashboardFooter = ({
       <Button
         variant="light"
         size="lg"
-        className="px-md-5"
+        className="px-md-5 mr-3"
         onClick={() => setRequestChanges(true)}
         disabled={disableChanges}
       >
@@ -100,21 +97,17 @@ const JobDashboardFooter = ({
       isHidden={requestChanges}
       className="d-flex flex-column flex-md-row align-items-center"
     >
-      {isPackage ? (
-        <IndexMenu className="mb-3 mb-md-0">
-          {job.urlArquivo.map((_, i) => (
-            <IndexMenu.Item
-              index={i + 1}
-              active={i === index}
-              key={`file_index_${i}`}
-              onClick={() => setIndex(i)}
-            />
-          ))}
-        </IndexMenu>
-      ) : (
-        <div />
-      )}
-
+      {console.log(job)}
+      <IndexMenu className="mb-3 mb-md-0">
+        {job.detalhes.map((_, i) => (
+          <IndexMenu.Item
+            index={i + 1}
+            active={i === index}
+            key={`file_index_${i}`}
+            onClick={() => setIndex(i)}
+          />
+        ))}
+      </IndexMenu>
       <div className="d-flex justify-content-around w-100 w-md-auto d-md-block">
         {user.isAdmin ? adminButtons : nonAdminButtons}
       </div>

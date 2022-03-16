@@ -11,6 +11,7 @@ const UploadField = ({
   multiple = false,
   infoText = defaultText,
   handleUpload,
+  handleRemoveFile,
   children,
 }) => {
   const onReadFiles = (files) => {
@@ -50,43 +51,91 @@ const UploadField = ({
             dataUrls.length === 1 ? (
               <img className="field-upload-image" src={dataUrls} alt="" />
             ) : (
-              <div className="container w-100 h-100 d-block position-relative">
+              <div className="container w-100 h-100">
                 <div className="row h-50">
                   {dataUrls[0] ? (
-                    <img
-                      className="col img-thumbnail m-1 w-100"
-                      src={dataUrls[0]}
-                      alt=""
-                    />
+                    <div
+                      className="position-relative m-1"
+                      style={{ width: '48%', height: '96%' }}
+                    >
+                      <img
+                        className="img-fluid w-100 h-100 rounded"
+                        src={dataUrls[0]}
+                        alt=""
+                      />
+                      <span
+                        onClick={() => handleRemoveFile(0)}
+                        className="position-absolute shadow"
+                        style={{ right: 5, top: 5, color: 'white' }}
+                      >
+                        <Icon name={Icon.types.close} size={18} />
+                      </span>
+                    </div>
                   ) : (
                     <div className="col m-1"></div>
                   )}
                   {dataUrls[1] ? (
-                    <img
-                      className="col img-thumbnail m-1"
-                      src={dataUrls[1]}
-                      alt=""
-                    />
+                    <div
+                      className="position-relative m-1"
+                      style={{ width: '48%', height: '96%' }}
+                    >
+                      <img
+                        className="img-fluid w-100 h-100 rounded"
+                        src={dataUrls[1]}
+                        alt=""
+                      />
+                      <span
+                        onClick={() => handleRemoveFile(1)}
+                        className="position-absolute shadow"
+                        style={{ right: 5, top: 5, color: 'white' }}
+                      >
+                        <Icon name={Icon.types.close} size={18} />
+                      </span>
+                    </div>
                   ) : (
                     <div className="col m-1"></div>
                   )}
                 </div>
                 <div className="row h-50">
                   {dataUrls[2] ? (
-                    <img
-                      className="col img-thumbnail m-1"
-                      src={dataUrls[2]}
-                      alt=""
-                    />
+                    <div
+                      className="position-relative m-1"
+                      style={{ width: '48%', height: '96%' }}
+                    >
+                      <img
+                        className="img-fluid w-100 h-100 rounded"
+                        src={dataUrls[2]}
+                        alt=""
+                      />
+                      <span
+                        onClick={() => handleRemoveFile(2)}
+                        className="position-absolute shadow"
+                        style={{ right: 5, top: 5, color: 'white' }}
+                      >
+                        <Icon name={Icon.types.close} size={18} />
+                      </span>
+                    </div>
                   ) : (
                     <div className="col m-1"></div>
                   )}
                   {dataUrls[3] ? (
-                    <img
-                      className="col img-thumbnail m-1"
-                      src={dataUrls[3]}
-                      alt=""
-                    />
+                    <div
+                      className="position-relative m-1"
+                      style={{ width: '48%', height: '96%' }}
+                    >
+                      <img
+                        className="img-fluid w-100 h-100 rounded"
+                        src={dataUrls[3]}
+                        alt=""
+                      />
+                      <span
+                        onClick={() => handleRemoveFile(3)}
+                        className="position-absolute shadow"
+                        style={{ right: 5, top: 5, color: 'white' }}
+                      >
+                        <Icon name={Icon.types.close} size={18} />
+                      </span>
+                    </div>
                   ) : (
                     <div className="col m-1"></div>
                   )}

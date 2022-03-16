@@ -27,3 +27,17 @@
     }
   }
 }
+
+.status-bullet {
+  &-aprovado {
+    background: $green;
+  }
+
+  &-pendente {
+    background: $purple;
+  }
+
+  &-em-ajuste {
+    background: $orange;
+  }
+}

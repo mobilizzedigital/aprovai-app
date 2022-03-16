@@ -164,49 +164,18 @@ const JobForm = ({ id, name, type }) => {
   };
 
   const saveJob = async () => {
-    const formData = new FormData();
-
-    formData.append('Titulo', getValues('name'));
-    formData.append('IdCliente', client.value);
-
-    jobs.forEach((job) => {
-      //     collectionDescription: job.description,
-      //     collectionName: job.name
-
-      formData.append('Detalhes');
-    });
-
-    formData.append(
-      'Detalhes',
-      'test'
-      // nao funciona passar um object por Multipart Content-Type
-      // jobs.map(job => (
-      //   {
-      //     arquivos: job.files.map(file => (
-      //       {
-      //         endereco: file.url,
-      //         nome: file.name
-      //       }
-      //     )),
-      //     collectionDescription: job.description,
-      //     collectionName: job.name
-      //   }
-      // ))
-    );
-
-    console.log(
-      jobs.map((job) => ({
+    const body = {
+      titulo: getValues('name'),
+      idCliente: client.value,
+      detalhes: jobs.map((job) => ({
         arquivos: job.files.map((file) => ({
-          Endereco: file.url,
-          Nome: file.name,
+          dataUrl: file.url,
+          nome: file.name,
         })),
-        collectionDescription: job.description,
-        collectionName: job.name,
-      }))
-    );
-
-    console.log(formData.getAll('Detalhes'));
-    console.log(formData);
+        descricao: job.description,
+        nome: job.name,
+      })),
+    };
 
     setSaving(true);
 
@@ -219,7 +188,7 @@ const JobForm = ({ id, name, type }) => {
     // }
 
     try {
-      const { data } = await JobsAPI.saveJob(formData);
+      const { data } = await JobsAPI.saveJob(body);
 
       await JobsAPI.addProgress({
         idProjeto: data.id,

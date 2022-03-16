@@ -97,14 +97,16 @@ const JobDashboardFooter = ({
       isHidden={requestChanges}
       className="d-flex flex-column flex-md-row align-items-center"
     >
-      {console.log(job)}
       <IndexMenu className="mb-3 mb-md-0">
-        {job.detalhes.map((_, i) => (
+        {job.detalhes.map((detalhe, i) => (
           <IndexMenu.Item
             index={i + 1}
             active={i === index}
             key={`file_index_${i}`}
             onClick={() => setIndex(i)}
+            isAdjustRequested={
+              detalhe.arquivos[0].situacao === 'Pendente de Aprovação'
+            }
           />
         ))}
       </IndexMenu>

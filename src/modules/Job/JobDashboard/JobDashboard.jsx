@@ -1,20 +1,20 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import JobDashboardFooter from './JobDashboardFooter';
 import JobDashboardHeader from './JobDashboardHeader';
 import JobDashboardChangesForm from './JobDashboardChangesForm';
 import Timeline from '../../../components/Timeline';
-import Avatar from '../../../components/Avatar';
 import JobChangesRequestedModal from '../../../components/modals/JobChangesRequestedModal';
 import JobDashboardImageHandler from './JobDashboardImageHandler';
+import JobDashboardEditModalComponent from './JobDashboardEditModal';
+import JobDashboardRemoveItemModal from './JobDashboardRemoveItemModal';
 
 const JobDashboard = ({
   index,
   fileIndex,
   job,
   client,
-  isPackage,
   requestChanges,
   handleRequestChanges,
   timeline,
@@ -26,7 +26,19 @@ const JobDashboard = ({
   user,
   showChangesModal,
   handleCloseChangesModal,
+  openEditModal,
+  showEditModal,
+  handleCloseEditModal,
+  showBigPicture,
+  handleCloseBigPicture,
+  handleOpenBigPicture,
   progressItems,
+  onRemoveItem,
+  handleConfirmRemoveItem,
+  showRemoveItemModal,
+  handleCloseRemoveItemModal,
+  handleAttachNew,
+  handleRemoveFile,
 }) => (
   <main className="mt-5 pb-5" style={{ marginBottom: 180 }}>
     <Container>
@@ -37,6 +49,13 @@ const JobDashboard = ({
               setFileIndex={setFileIndex}
               fileIndex={fileIndex}
               files={job.detalhes[index].arquivos}
+              description={
+                job.detalhes[index].collectionDescription ??
+                'afsdasdfadsfafsdasdfadsfafsdasdfadsfafsdasdfadsfafsdasdfadsf'
+              }
+              showBigPicture={showBigPicture}
+              handleCloseBigPicture={handleCloseBigPicture}
+              handleOpenBigPicture={handleOpenBigPicture}
             />
           </div>
           <div className="bg-white rounded shadow p-3 text-break">
@@ -49,11 +68,14 @@ const JobDashboard = ({
         </Col>
         <Col md={{ span: 6, offset: 2 }}>
           <Row>
-            <Col xs={12} md={2}>
-              <Avatar src={client.enderecoLogo} size={56} />
-            </Col>
             <Col xs={12} md={10}>
-              <JobDashboardHeader job={job} index={index} />
+              <JobDashboardHeader
+                job={job}
+                index={index}
+                avatar={client.enderecoLogo}
+                item={job.detalhes[index]}
+                onRemoveItem={onRemoveItem}
+              />
 
               {requestChanges ? (
                 <JobDashboardChangesForm
@@ -71,6 +93,21 @@ const JobDashboard = ({
                     </Timeline>
                   ) : null}
                 </>
+              )}
+              {job.detalhes[index].arquivos[0].situacao !== 'Ajuste' ? (
+                <Button
+                  style={{
+                    backgroundColor: '#FF9A23',
+                    border: 'none',
+                    color: 'black',
+                  }}
+                  className="w-100 p-3"
+                  onClick={() => openEditModal()}
+                >
+                  Ajustar item
+                </Button>
+              ) : (
+                <></>
               )}
             </Col>
           </Row>
@@ -93,6 +130,20 @@ const JobDashboard = ({
     <JobChangesRequestedModal
       show={showChangesModal}
       onHide={handleCloseChangesModal}
+    />
+
+    <JobDashboardEditModalComponent
+      show={showEditModal}
+      onHide={handleCloseEditModal}
+      item={job.detalhes[index]}
+      handleAttachNew={handleAttachNew}
+      handleRemoveFile={handleRemoveFile}
+    />
+
+    <JobDashboardRemoveItemModal
+      handleConfirmRemoveItem={handleConfirmRemoveItem}
+      showRemoveItemModal={showRemoveItemModal}
+      handleCloseRemoveItemModal={handleCloseRemoveItemModal}
     />
   </main>
 );

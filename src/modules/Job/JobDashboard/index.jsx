@@ -19,13 +19,74 @@ const JobDashboard = ({ id, setPageTitle }) => {
   const [fileIndex, setFileIndex] = useState(null);
   const [timeline, setTimeline] = useState([]);
   const [requestChanges, setRequestChanges] = useState(false);
-  const [showChangesModal, setShowChangesModal] = useState(false);
+  const [showRequestChangesModal, setShowRequestChangesModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showBigPicture, setShowBitPicture] = useState(false);
+  const [showRemoveItemModal, setShowRemoveItemModal] = useState(false);
   const { addToast } = useToasts();
   const user = useSelector(userSelector);
   const jobType = job.tipoProjeto ? job.tipoProjeto : JOB_TYPES.separate;
   const history = useHistory();
 
-  const handleCloseChangesModal = () => history.push(ROUTES.home);
+  const handleConfirmRemoveItem = () => {
+    if (job.detalhes.length > 1) {
+      setJob({
+        ...job,
+        detalhes: job.detalhes.filter(
+          (_, detalheIndex) => detalheIndex !== index
+        ),
+      });
+      index > 0 ? setIndex(index - 1) : setIndex(0);
+    }
+    setShowRemoveItemModal(false);
+  };
+
+  const onRemoveItem = () => {
+    setShowRemoveItemModal(true);
+  };
+
+  const handleCloseRemoveItemModal = () => {
+    setShowRemoveItemModal(false);
+  };
+
+  const openEditModal = () => setShowEditModal(true);
+
+  const handleCloseEditModal = (changedItem) => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseRequestChangesModal = () => history.push(ROUTES.home);
+
+  const handleCloseBigPicture = () => setShowBitPicture(false);
+
+  const handleOpenBigPicture = () => setShowBitPicture(true);
+
+  const handleRemoveFile = (fileIndex) => {
+    const detalhes = job.detalhes;
+
+    detalhes[index].arquivos = detalhes[index].arquivos.filter(
+      (_, index) => index !== fileIndex
+    );
+
+    setJob({ ...job, detalhes });
+  };
+
+  const handleAttachNew = (readFiles) => {
+    const detalhes = job.detalhes;
+
+    readFiles.forEach((file) => {
+      detalhes[index].arquivos.push({
+        id: null,
+        idProjeto: 0,
+        dataUrl: file[0],
+        nome: file[1].name,
+      });
+    });
+
+    console.log(detalhes);
+
+    setJob({ ...job, detalhes });
+  };
 
   const handleRequestChanges = async (description) => {
     setSaving(true);
@@ -295,9 +356,22 @@ const JobDashboard = ({ id, setPageTitle }) => {
       saving={saving}
       setIndex={setIndex}
       setFileIndex={setFileIndex}
+      setEdit
+      openEditModal={openEditModal}
+      showEditModal={showEditModal}
+      handleCloseEditModal={handleCloseEditModal}
       setRequestChanges={setRequestChanges}
-      showChangesModal={showChangesModal}
-      handleCloseChangesModal={handleCloseChangesModal}
+      showRequestChangesModal={showRequestChangesModal}
+      handleCloseRequestChangesModal={handleCloseRequestChangesModal}
+      showBigPicture={showBigPicture}
+      handleCloseBigPicture={handleCloseBigPicture}
+      handleOpenBigPicture={handleOpenBigPicture}
+      onRemoveItem={onRemoveItem}
+      handleConfirmRemoveItem={handleConfirmRemoveItem}
+      showRemoveItemModal={showRemoveItemModal}
+      handleCloseRemoveItemModal={handleCloseRemoveItemModal}
+      handleAttachNew={handleAttachNew}
+      handleRemoveFile={handleRemoveFile}
       user={user}
     />
   );
